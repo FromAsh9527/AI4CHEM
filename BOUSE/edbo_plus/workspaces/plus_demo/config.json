@@ -1,0 +1,36 @@
+{
+  "filename": "reaction.csv",
+  "objectives": [
+    "yield",
+    "cost"
+  ],
+  "objective_mode": [
+    "max",
+    "min"
+  ],
+  "objective_thresholds": null,
+  "batch": 3,
+  "seed": 0,
+  "init_sampling_method": "cvt",
+  "acquisition_function": "NoisyEHVI",
+  "acquisition_function_sampler": "SobolQMCNormalSampler",
+  "columns_features": "all",
+  "components": {
+    "solvent": [
+      "THF",
+      "Toluene",
+      "DMSO"
+    ],
+    "T": [
+      -10,
+      0,
+      10,
+      25
+    ],
+    "concentration": [
+      0.1,
+      0.2,
+      1.0
+    ]
+  }
+}

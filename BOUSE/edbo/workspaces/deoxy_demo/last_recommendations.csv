@@ -1,0 +1,6 @@
+rank,sulfonyl_fluoride,base,solvent,substrate_concentration,sulfonyl_equiv,base_equiv,temperature
+1,O=S(C1=CC=CC=C1)(F)=O,CN1CCN2CCN(C)P1N(C)CC2,FC(C1=CC=CC=C1)(F)F,0.1,1.1,1.3,60
+2,O=S(C1=CC=C([N+]([O-])=O)C=C1)(F)=O,CN1C2=NCCCN2CCC1,FC(C1=CC=CC=C1)(F)F,0.1,1.3,1.7,60
+3,O=S(C1=CC=CC=N1)(F)=O,N1(CC2)CCC2CC1,FC(C1=CC=CC=C1)(F)F,0.2,1.7,1.9,60
+4,O=S(CC1=CC=CC=C1)(F)=O,CN(/C(N(C)C)=N\C(C)(C)C)C,FC(C1=CC=CC=C1)(F)F,0.1,1.7,1.7,40
+5,O=S(C1=CC=C(C)C=C1)(F)=O,CN1C2=NCCCN2CCC1,FC(C1=CC=CC=C1)(F)F,0.5,1.1,1.7,20

@@ -1,0 +1,36 @@
+.claude/
+.env
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# 大体积数据与模型（保留本地/网盘，不进 Git）
+*.pkl
+*.h5
+*.pt
+*.pth
+*.rds
+*.RData
+*.RDataTmp*
+*.chk
+*.log
+*.pdf
+
+# Office 锁临时文件
+~$*.xlsx
+~$*.pptx
+~$*.docx
+
+# Gaussian 计算中间产物（可再生，不进 Git）
+*.gjf
+*.gif
+*.out
+
+# 百度网盘同步冲突副本
+*冲突文件*
+
+# 仅本地保留，暂不入库
+TransferBO/

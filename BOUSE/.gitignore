@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Local / regenerable
+descriptors/output/*
+!descriptors/output/.gitkeep
+edbo/workspaces/_smoke_demo/
+edbo/workspaces/TEST-*/
+edbo_plus/workspaces/_smoke/
+edbo_plus/workspaces/_ui_smoke/
+edbo_plus/workspaces/ui_smoke/
+edbo_plus/workspaces/ui_smoke2/
+edbo/**/test_flow_report.json
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Upstream local Sphinx rebuild (prebuilt docs/ kept)
+edbo/edbo-master/docs/make/build/

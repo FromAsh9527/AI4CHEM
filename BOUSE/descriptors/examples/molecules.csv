@@ -1,0 +1,7 @@
+molecule_id,smiles
+THF,C1CCOC1
+PhCF3,FC(F)(F)c1ccccc1
+DMF,CN(C)C=O
+DMSO,CS(C)=O
+toluene,Cc1ccccc1
+invalid_demo,not_a_smiles

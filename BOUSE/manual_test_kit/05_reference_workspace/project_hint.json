@@ -1,0 +1,15 @@
+{
+  "reaction": "Suzuki",
+  "suggested_project_name": "suzuki_demo",
+  "target_column": "yield",
+  "chemical_factors": [
+    "electrophile",
+    "nucleophile",
+    "ligand",
+    "base",
+    "solvent"
+  ],
+  "domain_size": 3696,
+  "oracle_coverage": "full (every domain point has yield)",
+  "source": "edbo/edbo-master/experiments/data/suzuki"
+}

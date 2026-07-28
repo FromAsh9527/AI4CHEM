@@ -1,0 +1,14 @@
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+seaborn
+dill
+pyclustering
+rdkit-pypi
+torch
+gpytorch>=1.11
+pyro-ppl>=1.8
+streamlit
+openpyxl

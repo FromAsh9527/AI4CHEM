@@ -1,0 +1,5 @@
+molecule_id,electrophile_electronic_spatial_extent,electrophile_ES_root_electronic_spatial_extent,electrophile_H,electrophile_E,electrophile_E_zpe,electrophile_G,electrophile_E_scf,electrophile_atom2_NMR_shift,electrophile_atom2_NMR_anisotropy,electrophile_molar_volume,electrophile_ES_root_molar_volume,electrophile_vib_4_dip_strength,electrophile_vib_6_dip_strength,electrophile_vib_3_dip_strength,electrophile_vib_2_dip_strength
+BrC1=CC=C(N=CC=C2)C2=C1,2860.1324,2854.7466,-2972.900113,-2972.901057,-2972.909171,-2972.943547,-2973.03509333,2175.014,1169.4285,1375.177,1044.116,12.4908,12.4908,14.8124,39.2728
+ClC1=CC=C(N=CC=C2)C2=C1,2121.9672,2119.0097,-861.391123,-861.392067,-861.399961,-861.433283,-861.526291926,721.5106,458.9791,1108.651,1255.076,2.8006,2.8006,35.8735,35.8735
+IC1=CC=C(N=CC=C2)C2=C1,2435.4274,2440.3318,-412.56458,-412.565525,-412.573844,-412.609111,-412.699293535,43.8941,30.5546,1154.778,1315.163,22.7431,22.7431,56.3185,56.3185
+O=S(OC1=CC=C(N=CC=C2)C2=C1)(C(F)(F)F)=O,5925.9453,5914.8495,-1362.556286,-1362.55723,-1362.572146,-1362.617759,-1362.72648719,93.9002,227.8679,2066.296,1718.044,420.2451,420.2451,420.2451,420.2451

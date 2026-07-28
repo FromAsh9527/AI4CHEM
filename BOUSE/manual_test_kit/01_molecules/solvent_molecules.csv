@@ -1,0 +1,5 @@
+molecule_id,smiles
+O=CN(C)C,O=CN(C)C
+N#CC,N#CC
+CO,CO
+C1COCC1,C1COCC1

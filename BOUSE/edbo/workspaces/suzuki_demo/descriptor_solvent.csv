@@ -1,0 +1,5 @@
+molecule_id,solvent_c_min_NMR_anisotropy,solvent_atom1_NMR_anisotropy,solvent_c_min+1_NMR_anisotropy,solvent_ES_root_molar_volume,solvent_molar_volume,solvent_atom1_NMR_shift,solvent_electronic_spatial_extent,solvent_ES_root_electronic_spatial_extent,solvent_c_min_NMR_shift,solvent_c_max_NMR_anisotropy,solvent_c_min+1_NMR_shift,solvent_E_scf,solvent_G,solvent_E_zpe,solvent_E
+O=CN(C)C,556.4652,556.4652,111.5214,790.122,751.89,-44.8937,443.7717,442.5973,-44.8937,68.3881,152.0657,-248.5122455,-248.438305,-248.409207,-248.403123
+N#CC,20.7477,470.7644,470.7644,425.305,425.305,-1.6109,161.6107,162.859,187.8659,304.6184,-1.6109,-132.754928297,-132.733304,-132.709288,-132.705693
+CO,104.6123,104.6123,68.3034,422.625,323.713,315.8265,84.09,89.4388,315.8265,16.7156,139.2811,-115.714405962,-115.685653,-115.662933,-115.659643
+C1COCC1,130.848,130.848,18.1807,732.11,597.89,286.7437,373.629,380.8533,286.7437,69.7594,160.9869,-232.44944943,-232.360749,-232.33209,-232.327135

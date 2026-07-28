@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "template": "suzuki_coupling",
+  "target_column": "yield",
+  "batch_size": 5,
+  "acquisition_function": "EI",
+  "training_iters": 100,
+  "noise_constraint": 0.01,
+  "domain_cap": 4000,
+  "factors": [
+    {
+      "key": "electrophile",
+      "kind": "chemical",
+      "encoding": "descriptor",
+      "id_column": "molecule_id",
+      "levels": [],
+      "numeric_mode": "list",
+      "values": [],
+      "linspace_min": null,
+      "linspace_max": null,
+      "linspace_n": 5,
+      "arange_min": null,
+      "arange_max": null,
+      "arange_step": null
+    },
+    {
+      "key": "nucleophile",
+      "kind": "chemical",
+      "encoding": "descriptor",
+      "id_column": "molecule_id",
+      "levels": [],
+      "numeric_mode": "list",
+      "values": [],
+      "linspace_min": null,
+      "linspace_max": null,
+      "linspace_n": 5,
+      "arange_min": null,
+      "arange_max": null,
+      "arange_step": null
+    },
+    {
+      "key": "ligand",
+      "kind": "chemical",
+      "encoding": "descriptor",
+      "id_column": "molecule_id",
+      "levels": [],
+      "numeric_mode": "list",
+      "values": [],
+      "linspace_min": null,
+      "linspace_max": null,
+      "linspace_n": 5,
+      "arange_min": null,
+      "arange_max": null,
+      "arange_step": null
+    },
+    {
+      "key": "base",
+      "kind": "chemical",
+      "encoding": "descriptor",
+      "id_column": "molecule_id",
+      "levels": [],
+      "numeric_mode": "list",
+      "values": [],
+      "linspace_min": null,
+      "linspace_max": null,
+      "linspace_n": 5,
+      "arange_min": null,
+      "arange_max": null,
+      "arange_step": null
+    },
+    {
+      "key": "solvent",
+      "kind": "chemical",
+      "encoding": "descriptor",
+      "id_column": "molecule_id",
+      "levels": [],
+      "numeric_mode": "list",
+      "values": [],
+      "linspace_min": null,
+      "linspace_max": null,
+      "linspace_n": 5,
+      "arange_min": null,
+      "arange_max": null,
+      "arange_step": null
+    }
+  ],
+  "source": "edbo-master/experiments/data/suzuki",
+  "descriptor_info": {
+    "electrophile": {
+      "n_molecules": 4,
+      "n_features": 15
+    },
+    "nucleophile": {
+      "n_molecules": 3,
+      "n_features": 15
+    },
+    "ligand": {
+      "n_molecules": 11,
+      "n_features": 15
+    },
+    "base": {
+      "n_molecules": 7,
+      "n_features": 15
+    },
+    "solvent": {
+      "n_molecules": 4,
+      "n_features": 15
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "domain_size": 312500,
+  "expected_domain_size": 312500,
+  "n_recommendation_rounds": 2,
+  "comparisons": [
+    {
+      "label": "init vs official init",
+      "proposed_n": 5,
+      "official_n": 5,
+      "exact_set_match": true,
+      "overlap": 5,
+      "overlap_ratio": 1.0
+    },
+    {
+      "label": "after init → vs official round0",
+      "proposed_n": 5,
+      "official_n": 5,
+      "exact_set_match": false,
+      "overlap": 2,
+      "overlap_ratio": 0.4
+    },
+    {
+      "label": "after round0 → vs official round1",
+      "proposed_n": 5,
+      "official_n": 5,
+      "exact_set_match": true,
+      "overlap": 5,
+      "overlap_ratio": 1.0
+    }
+  ],
+  "note": "提案与官方不完全一致时常见：gpytorch/torch 版本、优化随机性与论文当时环境不同。init(seed=8) 应对齐；后续 GP 推荐可能有偏差。"
+}

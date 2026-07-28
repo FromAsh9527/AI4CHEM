@@ -1,0 +1,8 @@
+molecule_id,smiles
+[Cs+].[F-],[Cs+].[F-]
+CCN(CC)CC,CCN(CC)CC
+O=P([O-])([O-])[O-].[K+].[K+].[K+],O=P([O-])([O-])[O-].[K+].[K+].[K+]
+[K+].[OH-],[K+].[OH-]
+CC([O-])C.[Li+],CC([O-])C.[Li+]
+OC([O-])=O.[Na+],OC([O-])=O.[Na+]
+[Na+].[OH-],[Na+].[OH-]
