@@ -3,7 +3,7 @@
 从 EDBO 官方 Suzuki 数据整理手动测试物料（支持推荐→查表回填）。
 
 数据::
-  edbo/edbo-master/experiments/data/suzuki/
+  edbo/data/suzuki/（复制自上游 edbo-master）
 
 产物::
   BOUSE/manual_test_kit/
@@ -24,7 +24,7 @@ import pandas as pd
 
 BOUSE = Path(__file__).resolve().parents[1]
 EDBO = BOUSE / "edbo"
-SRC = EDBO / "edbo-master" / "experiments" / "data" / "suzuki"
+SRC = EDBO / "data" / "suzuki"
 KIT = BOUSE / "manual_test_kit"
 MAX_FEATURES = 15
 
@@ -140,7 +140,7 @@ def main() -> None:
         "chemical_factors": list(FACTOR_DFT.keys()),
         "domain_size": 4 * 3 * 11 * 7 * 4,
         "oracle_coverage": "full (every domain point has yield)",
-        "source": "edbo/edbo-master/experiments/data/suzuki",
+        "source": "edbo/data/suzuki (复制自上游 edbo-master)",
     }
     (d_ref / "project_hint.json").write_text(
         json.dumps(hint, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -148,7 +148,7 @@ def main() -> None:
 
     readme = """# 手动测试物料包（Suzuki）
 
-数据来源：`edbo/edbo-master/experiments/data/suzuki/`
+数据来源：`edbo/data/suzuki/`（复制自上游 edbo-master）
 
 **与 Deoxy 物料的关键区别**：这里的 `04_oracle/experiment_index.csv` 覆盖
 **全部 3696 个搜索域点**。因此：界面推荐出什么条件，都能查到真实产率回填，

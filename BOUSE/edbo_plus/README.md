@@ -10,7 +10,7 @@
 |------|------|
 | `app.py` | Streamlit 向导（项目→域→推荐→回填） |
 | `src/` | 工作区 / 调用 `EDBOplus` / 回填 |
-| `edboplus-master/` | 上游源码（editable 安装） |
+| `data/` | 上游数据副本（suzuki_b1 多目标基准） |
 | `workspaces/` | 项目数据（每项目一个 `reaction.csv`） |
 | `scripts/` | 冒烟测试 |
 

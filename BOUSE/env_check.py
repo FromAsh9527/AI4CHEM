@@ -82,7 +82,7 @@ def check_edbo_plus() -> tuple[bool, str]:
     except Exception as e:
         lines.append(f"错误：无法导入 EDBO+（edbo.plus）：{e}")
         lines.append(
-            "请：conda activate edbo_plus，并 pip install -e edboplus-master --no-deps"
+            "请：conda activate edbo_plus，并 pip install -e <AI-Pharmacy>/third_party/edboplus-master --no-deps"
         )
         return False, "\n".join(lines)
 

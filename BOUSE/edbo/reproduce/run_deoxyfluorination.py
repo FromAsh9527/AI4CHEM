@@ -3,7 +3,7 @@
 纯复现：EDBO 论文示例 — Deoxyfluorination（官方 examples notebook）。
 
 对照源：
-  edbo-master/examples/deoxyfluorination_optimization/optimization.ipynb
+  edbo/data/deoxyfluorination_example/optimization.ipynb（复制自上游 edbo-master）
 
 流程：
   1. 用 DFT 描述符 + 数值网格构建 312,500 点反应空间
@@ -32,9 +32,15 @@ import pandas as pd  # noqa: E402
 from gpytorch.priors import GammaPrior  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLE = ROOT / "edbo-master" / "examples" / "deoxyfluorination_optimization"
+EXAMPLE = ROOT / "data" / "deoxyfluorination_example"
 OUT = Path(__file__).resolve().parent / "output" / "deoxyfluorination"
-sys.path.insert(0, str(ROOT / "edbo-master"))
+# 上游 edbo 包：优先用 pip 安装版，否则回退到仓库外 third_party 副本
+try:
+    import edbo  # noqa: F401
+except ImportError:  # pragma: no cover
+    _tp = Path(__file__).resolve().parents[4] / "third_party" / "edbo-master"
+    if _tp.is_dir():
+        sys.path.insert(0, str(_tp))
 
 from edbo.bro import BO_express  # noqa: E402
 from edbo.utils import Data  # noqa: E402

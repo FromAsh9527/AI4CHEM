@@ -3,7 +3,7 @@
 用官方 Suzuki 全量数据构建可闭环测试的工作区。
 
 数据来源::
-  edbo-master/experiments/data/suzuki/
+  edbo/data/suzuki/（复制自上游 edbo-master，见 third_party/）
 
 特点::
   - 搜索域 = 全因子笛卡尔积 = 3696 点
@@ -35,7 +35,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "edbo-master" / "experiments" / "data" / "suzuki"
+SRC = ROOT / "data" / "suzuki"
 OUT_NAME = "suzuki_demo"
 
 FACTOR_DFT = {
@@ -110,7 +110,7 @@ def build_config(feat_info: dict) -> dict:
     return {
         "schema_version": 1,
         "template": "suzuki_coupling",
-        "source": "edbo-master/experiments/data/suzuki",
+        "source": "edbo/data/suzuki (复制自上游 edbo-master)",
         "target_column": "yield",
         "batch_size": 5,
         "acquisition_function": "EI",
@@ -173,7 +173,7 @@ def main() -> None:
 
     readme = f"""Suzuki 闭环测试工作区
 ====================
-来源: edbo-master/experiments/data/suzuki
+来源: edbo/data/suzuki（复制自上游 edbo-master）
 搜索域: 4×3×11×7×4 = 3696（与 oracle 一一对应）
 历史: {len(hist)} 条
 描述符: {'full' if max_feat is None else f'top-{max_feat} / chem'}

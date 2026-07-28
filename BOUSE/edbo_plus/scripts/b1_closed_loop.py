@@ -23,7 +23,7 @@ from botorch.utils.multi_objective.hypervolume import Hypervolume
 from sklearn.preprocessing import MinMaxScaler
 
 ROOT = Path(__file__).resolve().parents[1]
-B1 = ROOT / "edboplus-master" / "examples" / "publication" / "Suzuki" / "data" / "dataset_B1.csv"
+B1 = ROOT / "data" / "suzuki_b1" / "dataset_B1.csv"
 FACTORS = ["ligand", "base", "solvent", "ligand_equivalent"]
 OBJS = ["objective_conversion", "objective_selectivity"]
 
@@ -76,9 +76,13 @@ def main() -> int:
     ap.add_argument("--name", default="b1_closed_loop")
     args = ap.parse_args()
 
-    if str(ROOT / "edboplus-master") not in sys.path:
-        # editable install should already expose edbo; keep local fallback
-        pass
+    # 上游 edbo 包：优先用 pip 安装版，否则回退到仓库外 third_party 副本
+    try:
+        import edbo  # noqa: F401
+    except ImportError:  # pragma: no cover
+        _tp = Path(__file__).resolve().parents[4] / "third_party" / "edboplus-master"
+        if _tp.is_dir():
+            sys.path.insert(0, str(_tp))
 
     from edbo.plus.optimizer_botorch import EDBOplus
 

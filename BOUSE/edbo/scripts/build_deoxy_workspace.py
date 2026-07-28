@@ -3,7 +3,7 @@
 用官方 Deoxyfluorination 示例数据构建可在本应用中打开的测试工作区。
 
 数据来源::
-  edbo-master/examples/deoxyfluorination_optimization/
+  edbo/data/deoxyfluorination_example/（复制自上游 edbo-master）
 
 产物::
   workspaces/deoxy_demo/
@@ -31,7 +31,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLE = ROOT / "edbo-master" / "examples" / "deoxyfluorination_optimization"
+EXAMPLE = ROOT / "data" / "deoxyfluorination_example"
 OUT_NAME = "deoxy_demo"
 
 DROP_KEYWORDS = [
@@ -122,7 +122,7 @@ def build_config() -> dict:
     return {
         "schema_version": 1,
         "template": "condition_optimization",
-        "source": "edbo-master/examples/deoxyfluorination_optimization",
+        "source": "edbo/data/deoxyfluorination_example (复制自上游 edbo-master)",
         "target_column": "yield",
         "batch_size": 5,
         "acquisition_function": "EI",
@@ -234,7 +234,7 @@ def main():
 
     readme = f"""Deoxyfluorination 测试工作区
 ===========================
-来源: edbo-master/examples/deoxyfluorination_optimization
+来源: edbo/data/deoxyfluorination_example（复制自上游 edbo-master）
 历史条数: {len(hist)}
 描述符: {'full' if max_feat is None else f'top-{max_feat} variance / chem'}
 搜索域期望大小: 10 * 10 * 5 * 5 * 5 * 5 * 5 = 312500

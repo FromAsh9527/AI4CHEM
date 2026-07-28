@@ -40,7 +40,7 @@ from workspace import (  # noqa: E402
 )
 
 EXAMPLE_RESULTS = (
-    ROOT / "edbo-master" / "examples" / "deoxyfluorination_optimization" / "results"
+    ROOT / "data" / "deoxyfluorination_example" / "results"
 )
 COL_MAP = {
     "sulfonyl_fluoride_SMILES_index": "sulfonyl_fluoride",

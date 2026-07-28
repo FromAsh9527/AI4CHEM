@@ -1,6 +1,6 @@
 # 手动测试物料包（Suzuki）
 
-数据来源：`edbo/edbo-master/experiments/data/suzuki/`
+数据来源：`edbo/data/suzuki/`（复制自上游 edbo-master）
 
 **与 Deoxy 物料的关键区别**：这里的 `04_oracle/experiment_index.csv` 覆盖
 **全部 3696 个搜索域点**。因此：界面推荐出什么条件，都能查到真实产率回填，

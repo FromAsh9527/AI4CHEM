@@ -9,8 +9,13 @@ import numpy as np
 import pandas as pd
 
 _ROOT = Path(__file__).resolve().parent.parent
-if str(_ROOT / "edbo-master") not in sys.path:
-    sys.path.insert(0, str(_ROOT / "edbo-master"))
+# 上游 edbo 包：优先 pip 安装版，否则回退到仓库外 third_party 副本
+try:
+    import edbo  # noqa: F401
+except ImportError:  # pragma: no cover
+    _tp = _ROOT.parents[2] / "third_party" / "edbo-master"
+    if _tp.is_dir():
+        sys.path.insert(0, str(_tp))
 
 from edbo.bro import BO  # noqa: E402
 

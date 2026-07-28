@@ -12,9 +12,8 @@ OUT = ROOT / "output"
 DFT = (
     ROOT.parent
     / "edbo"
-    / "edbo-master"
-    / "examples"
-    / "deoxyfluorination_optimization"
+    / "data"
+    / "deoxyfluorination_example"
     / "descriptors"
     / "solvent_dft.csv"
 )

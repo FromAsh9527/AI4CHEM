@@ -24,5 +24,4 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Upstream local Sphinx rebuild (prebuilt docs/ kept)
-edbo/edbo-master/docs/make/build/
+# Upstream 副本已移至仓库外 third_party/（其 prebuilt docs 不再入库）

@@ -9,7 +9,7 @@
 
 | 路径 | 说明 |
 |------|------|
-| `edbo-master/` | 上游 EDBO 源码 |
+| `data/` | 上游数据副本（suzuki 全网格、deoxyfluorination 官方示例） |
 | `reproduce/` | 论文示例纯复现（Deoxyfluorination） |
 | `src/` | 工作区 / 域构建 / 推荐 / 回填 |
 | `app.py` | Streamlit 向导入口 |

@@ -5,8 +5,8 @@
 ## 论文与官方源
 
 - 论文：Shields et al., *Bayesian Reaction Optimization as A Tool for Chemical Synthesis*
-- 上游：`../edbo-master/`
-- 本脚本对照：`../edbo-master/examples/deoxyfluorination_optimization/optimization.ipynb`
+- 上游：`third_party/edbo-master/`（仓库外，AI-Pharmacy 同级）
+- 本脚本对照：`../data/deoxyfluorination_example/optimization.ipynb`
 
 ## 跑什么
 
@@ -37,8 +37,8 @@ python reproduce/run_deoxyfluorination.py --all-rounds # 跑满官方全部轮�
 | `init` vs `results/init.csv` | 条件集合完全一致（seed=8） |
 | 后续轮次提案 | 与官方尽量重合；torch/gpytorch 版本不同时可能不完全一致 |
 
-## 其他官方示例（未脚本化）
+## 其他官方示例（未脚本化，均在 third_party/edbo-master/ 中）
 
-- `edbo-master/examples/mitsunobu_optimization/`
-- `edbo-master/examples/DOE/`
-- `edbo-master/experiments/edbo_demo_and_simulations.ipynb`
+- `examples/mitsunobu_optimization/`
+- `examples/DOE/`
+- `experiments/edbo_demo_and_simulations.ipynb`
