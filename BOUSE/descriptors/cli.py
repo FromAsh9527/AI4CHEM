@@ -54,6 +54,12 @@ def cmd_from_smiles(args: argparse.Namespace) -> None:
         from generators.mordred.core import compute as compute_mordred
 
         desc, failed = compute_mordred(mols, ignore_3D=not bool(args.with_3d))
+    elif args.backend == "xtb":
+        from generators.xtb.core import compute as compute_xtb
+
+        desc, failed = compute_xtb(
+            mols, xtb=args.xtb, gfn=args.gfn, opt=bool(args.opt), timeout=args.timeout
+        )
     else:
         raise SystemExit(f"未知 backend: {args.backend}")
     if desc.empty:
@@ -103,7 +109,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_smi.add_argument("-o", "--output", type=Path, default=None)
     p_smi.add_argument(
         "--backend",
-        choices=["rdkit_2d", "morgan", "maccs", "mordred"],
+        choices=["rdkit_2d", "morgan", "maccs", "mordred", "xtb"],
         default="rdkit_2d",
     )
     p_smi.add_argument("--id-col", default=None)
@@ -116,6 +122,10 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="mordred: 包含需 3D 的描述符（默认只算 2D）",
     )
+    p_smi.add_argument("--xtb", default=None, help="xtb: 可执行文件路径（默认可自动查找）")
+    p_smi.add_argument("--gfn", type=int, default=2, choices=[0, 1, 2], help="xtb: GFN 级别")
+    p_smi.add_argument("--opt", action="store_true", help="xtb: 先几何优化（慢但更准）")
+    p_smi.add_argument("--timeout", type=int, default=300, help="xtb: 单分子超时秒数")
     p_smi.set_defaults(func=cmd_from_smiles)
 
     p_clean = sub.add_parser("clean", help="清洗已有表")

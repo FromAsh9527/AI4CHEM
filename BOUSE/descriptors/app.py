@@ -45,6 +45,7 @@ KIND_LABELS = {
     "maccs": "MACCS keys",
     "morgan": "Morgan 指纹",
     "mordred": "Mordred（需安装 mordred）",
+    "xtb": "xTB 半经验量化（需 xtb，较慢）",
 }
 
 OUTPUT_DIR = ROOT / "output"
@@ -102,6 +103,7 @@ def page_from_smiles():
 
     radius, n_bits, use_counts = 2, 128, False
     ignore_3d = True
+    xtb_gfn, xtb_opt, xtb_timeout = 2, False, 300
     if kind == "morgan":
         c3, c4, c5 = st.columns(3)
         radius = int(c3.number_input("radius", min_value=1, max_value=4, value=2))
@@ -109,6 +111,11 @@ def page_from_smiles():
         use_counts = c5.checkbox("计数指纹", value=False)
     elif kind == "mordred":
         ignore_3d = st.checkbox("忽略 3D 描述符（推荐）", value=True)
+    elif kind == "xtb":
+        c3, c4, c5 = st.columns(3)
+        xtb_gfn = int(c3.selectbox("GFN 级别", options=[2, 1, 0], index=0))
+        xtb_opt = c4.checkbox("几何优化（慢 3~10 倍）", value=False)
+        xtb_timeout = int(c5.number_input("单分子超时（秒）", min_value=60, max_value=3600, value=300, step=60))
 
     factor_key = st.text_input(
         "因子名（保存为 descriptor_<因子>.csv，需与 EDBO 因子 key 一致）",
@@ -127,6 +134,12 @@ def page_from_smiles():
                     )
                 elif kind == "maccs":
                     desc, failed = compute_maccs(mols)
+                elif kind == "xtb":
+                    from generators.xtb.core import compute as compute_xtb
+
+                    desc, failed = compute_xtb(
+                        mols, gfn=xtb_gfn, opt=xtb_opt, timeout=xtb_timeout
+                    )
                 else:
                     from generators.mordred.core import compute as compute_mordred
 

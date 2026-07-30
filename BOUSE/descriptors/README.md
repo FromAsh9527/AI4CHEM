@@ -15,6 +15,7 @@ descriptors/
 │   ├── maccs/
 │   ├── morgan/
 │   ├── mordred/           # 需 pip install mordred
+│   ├── xtb/               # 需 xtb 可执行文件（third_party/xtb/）
 │   └── clean/
 ├── examples/molecules.csv
 └── output/
@@ -36,6 +37,8 @@ python cli.py from-smiles examples/molecules.csv --backend rdkit_2d -o output/de
 python cli.py from-smiles examples/molecules.csv --backend maccs -o output/maccs.csv
 python cli.py from-smiles examples/molecules.csv --backend morgan --n-bits 128 -o output/fp.csv
 python cli.py from-smiles examples/molecules.csv --backend mordred -o output/mordred.csv
+python cli.py from-smiles examples/molecules.csv --backend xtb -o output/xtb.csv
+python cli.py from-smiles examples/molecules.csv --backend xtb --opt -o output/xtb_opt.csv
 python cli.py clean dft.csv --id-col solvent_SMILES -o output/clean.csv --max-features 20
 python cli.py validate output/demo.csv
 ```
