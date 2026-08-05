@@ -32,5 +32,11 @@ __pycache__/
 # 百度网盘同步冲突副本
 *冲突文件*
 
-# 仅本地保留，暂不入库
-TransferBO/
+# TransferBO：默认本地；描述符特征表可入库（其余仍由子目录 .gitignore 约束）
+TransferBO/**
+!TransferBO/.gitignore
+!TransferBO/data/
+TransferBO/data/**
+!TransferBO/data/README.md
+!TransferBO/data/descriptors/
+!TransferBO/data/descriptors/**

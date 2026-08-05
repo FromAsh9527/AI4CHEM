@@ -1,0 +1,13 @@
+file,bytes,mb
+chaos_drfp_n2048.csv,12219511,12.22
+chaos_fragprint_r2_n2048.csv,5951525,5.952
+chaos_morgan_r2_n2048.csv,2986021,2.986
+chaos_ohe_smiles.csv,1055885,1.056
+chaos_ohe_vocab.csv,16215,0.016
+chaos_xtb_gfn2.csv,107853,0.108
+edbo_amination_condition_dft.csv,1976371,1.976
+edbo_suzuki_condition_dft.csv,2384924,2.385
+edbo_suzuki_drfp_n2048.csv,1382305,1.382
+edbo_suzuki_drfp_n2048_pca128.csv,980254,0.98
+edbo_suzuki_morgan_r2_n2048.csv,3958689,3.959
+edbo_suzuki_morgan_r2_n2048_pca128.csv,988496,0.988

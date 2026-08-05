@@ -1,0 +1,28 @@
+[
+  {
+    "source": "edbo_suzuki_morgan_r2_n2048.csv",
+    "n_rows": 308,
+    "n_feat_raw": 6144,
+    "n_feat_nonzero_var": 172,
+    "n_components": 128,
+    "variance_explained": 1.0,
+    "n_comp_for_90pct": 14,
+    "n_comp_for_95pct": 16,
+    "n_comp_for_99pct": 18,
+    "pc1_var": 0.168158,
+    "output": "edbo_suzuki_morgan_r2_n2048_pca128.csv"
+  },
+  {
+    "source": "edbo_suzuki_drfp_n2048.csv",
+    "n_rows": 308,
+    "n_feat_raw": 2048,
+    "n_feat_nonzero_var": 220,
+    "n_components": 128,
+    "variance_explained": 1.0,
+    "n_comp_for_90pct": 14,
+    "n_comp_for_95pct": 16,
+    "n_comp_for_99pct": 20,
+    "pc1_var": 0.166769,
+    "output": "edbo_suzuki_drfp_n2048_pca128.csv"
+  }
+]

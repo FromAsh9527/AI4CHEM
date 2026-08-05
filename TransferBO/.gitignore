@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+
+# IDE / notebooks
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# 第三方与原始数据（保留本地）
+third_party/
+data/raw/**
+data/processed/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/README.md
+# Descriptor feature tables may be committed; label tables stay local under processed/
+!data/descriptors/
+!data/descriptors/**
+results/**
+!results/.gitkeep
+!results/meta/.gitkeep
+
+# 模型与缓存
+*.pkl
+*.pt
+*.pth
+*.h5
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store
