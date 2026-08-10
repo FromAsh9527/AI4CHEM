@@ -1,0 +1,48 @@
+# CHAOS main-line transfer grid with BOUSE xTB descriptors (GFN2, no geom opt)
+# Goal: check whether label vs diversity conclusions hold under a QM descriptor.
+
+experiment:
+  name: transfer_grid_xtb
+  output_dir: results/transfer_grid_xtb
+
+data:
+  processed_path: data/processed/additives_four_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+grid:
+  strategies: [cold_start, diversity_warm, label_warm]
+  representations: [xtb]
+  plates: [plate_1, plate_2, plate_3]
+  include_same_plate: false
+
+representation:
+  name: xtb
+  xtb:
+    table_path: data/processed/chaos_xtb_gfn2.csv
+    smiles_col: smiles
+    standardize: true
+
+strategy:
+  name: label_warm
+  n_init: 20
+  batch_size: 1
+  init_mode: random
+
+bo:
+  budget: 100
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_fraction: 1.0
+  max_warm_points: 150
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true

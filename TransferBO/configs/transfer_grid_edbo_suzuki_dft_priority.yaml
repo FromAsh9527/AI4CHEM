@@ -1,0 +1,54 @@
+# Priority pass: finish DFT arms in the MAIN suzuki output dir first.
+# Same protocol as transfer_grid_edbo_suzuki.yaml; representations = [dft] only.
+# Use with --skip-existing; then resume the full morgan/drfp/dft config.
+
+experiment:
+  name: edbo_suzuki
+  output_dir: results/external_edbo_suzuki
+
+data:
+  processed_path: data/processed/edbo_suzuki_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+grid:
+  strategies: [cold_start, label_warm]
+  representations: [dft]
+  plates: [suz_t12, suz_t8, suz_t1, suz_t9, suz_t10, suz_t7, suz_t5, suz_t3]
+  include_same_plate: false
+
+representation:
+  name: dft
+  morgan:
+    radius: 2
+    n_bits: 2048
+  drfp:
+    n_bits: 2048
+  dft:
+    table_path: data/descriptors/edbo_suzuki_condition_dft.csv
+    smiles_col: smiles
+    standardize: true
+
+strategy:
+  name: label_warm
+  n_init: 20
+  batch_size: 1
+  init_mode: random
+
+bo:
+  budget: 100
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_fraction: 1.0
+  max_warm_points: 150
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true

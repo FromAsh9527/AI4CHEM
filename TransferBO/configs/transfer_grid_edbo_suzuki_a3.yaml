@@ -1,0 +1,61 @@
+# EDBO Suzuki — A3 source-weighted pooling (S2)
+# Compare to S0 cold_start (matched init). Skip w_s=1 (≡ A1, already in S0).
+#
+# A3 question: should history be weak evidence?
+# Method: alpha_source = base_noise / w_s  (sklearn GPR diagonal noise).
+
+experiment:
+  name: edbo_suzuki_a3
+  output_dir: results/external_edbo_suzuki_a3
+
+data:
+  processed_path: data/processed/edbo_suzuki_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+grid:
+  strategies: [label_weight_w0p1, label_weight_w0p25, label_weight_w0p5]
+  representations: [morgan, dft]
+  plates: [suz_t12, suz_t8, suz_t1, suz_t9, suz_t10, suz_t7, suz_t5, suz_t3]
+  include_same_plate: false
+
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 2048
+  drfp:
+    n_bits: 2048
+  dft:
+    table_path: data/descriptors/edbo_suzuki_condition_dft.csv
+    smiles_col: smiles
+    standardize: true
+
+strategy:
+  name: label_weight_w0p25
+  n_init: 20
+  batch_size: 1
+  init_mode: random
+
+bo:
+  budget: 100
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_fraction: 1.0
+  max_warm_points: 150
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true
+
+a3:
+  source_weights: [0.1, 0.25, 0.5]
+  baseline: results/external_edbo_suzuki_s0
+  note: "matched target init; alpha_src = 1e-4 / w_s; w_s=1 ≡ A1 skipped"

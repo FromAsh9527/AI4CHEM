@@ -36,9 +36,10 @@
 
 ## 目录约定
 
-- `data/raw/` — 原始下载（不入库）
-- `data/processed/` — 清洗后的统一表（不入库）
-- `data/descriptors/` — 描述符特征表（**可入库**，便于 GitHub 复现）
+- `data/raw/` — 原始下载（常规 CSV **可入库**；超大外部表如 `BH_HTE_*.csv` 本地保留）
+- `data/processed/` — 清洗后的统一表（**可入库**）
+- `data/descriptors/` — 描述符特征表（**可入库**）
+- `results/` / `exports/` / `docs/` — 运行产物与汇报材料（**不入库**）
 
 ### 导出描述符表
 

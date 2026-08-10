@@ -15,19 +15,39 @@ venv/
 .ipynb_checkpoints/
 .pytest_cache/
 
-# 第三方与原始数据（保留本地）
+# 第三方依赖（本地保留）
 third_party/
-data/raw/**
-data/processed/**
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/README.md
-# Descriptor feature tables may be committed; label tables stay local under processed/
-!data/descriptors/
-!data/descriptors/**
+
+# 运行产物与汇报材料（不入库）
 results/**
 !results/.gitkeep
-!results/meta/.gitkeep
+exports/**
+docs/**
+notebooks/**
+notes/**
+*.pptx
+*.docx
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.tgz
+*.tar.gz
+*.zip
+
+# 数据：描述符 + 清洗表 + 常规 raw 可入库；超大原始表由根 .gitignore 排除
+data/raw/**
+!data/raw/.gitkeep
+!data/raw/**/
+!data/raw/**/*.csv
+!data/raw/**/*.md
+# 超大外部原始表本地保留
+data/raw/external/BH_HTE_Curated_Dataset_v20260219.csv
+!data/processed/
+!data/processed/**
+!data/descriptors/
+!data/descriptors/**
+!data/README.md
 
 # 模型与缓存
 *.pkl

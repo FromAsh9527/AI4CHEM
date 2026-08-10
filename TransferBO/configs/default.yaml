@@ -1,0 +1,48 @@
+# TransferBO 默认实验配置（计划书 §5 锁死公平性）
+
+experiment:
+  name: default
+  output_dir: results
+
+data:
+  processed_path: data/processed/additives_four_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+# 表示：ohe | morgan | fragprint | drfp
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 2048
+  fragprint:
+    radius: 2
+    n_bits: 2048
+
+# 策略：cold_start | diversity_warm | label_warm | multitask
+strategy:
+  name: cold_start
+  n_init: 20          # 10 / 20
+  batch_size: 1       # 主实验单点；附录可改 4
+
+bo:
+  budget: 100         # 总查询次数（含 init）：50 / 100
+  acquisition: ei     # ei | ucb
+  ucb_beta: 2.0
+  normalize_y: true
+  backend: sklearn    # sklearn（快起步）| botorch
+
+# 迁移设定（源板 → 目标板）
+transfer:
+  source_plate: null  # e.g. "plate_1"；cold_start 可留空
+  target_plate: plate_1
+  source_fraction: 1.0  # 源板可用标签比例
+
+# 随机种子 ≥20（计划书要求）
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]  # top-1% / top-5%
+  save_curves: true

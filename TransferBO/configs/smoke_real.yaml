@@ -1,0 +1,40 @@
+# 短冒烟：真实四板数据，小预算（验证通路，不作论文数字）
+
+experiment:
+  name: smoke_real
+  output_dir: results/smoke
+
+data:
+  processed_path: data/processed/additives_four_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 512
+
+strategy:
+  name: cold_start
+  n_init: 5
+  batch_size: 1
+
+bo:
+  budget: 15
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_plate: null
+  target_plate: plate_1
+  source_fraction: 1.0
+
+seeds: [0]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true

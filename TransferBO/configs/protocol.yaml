@@ -1,0 +1,91 @@
+# TransferBO 实验协议（冻结文件）
+# 变更必须写 changelog；held_out_target 在 Gate 冻结前禁止用于调参
+
+protocol_version: "1.0"
+
+held_out:
+  target_plate: plate_4
+  rule: >
+    方法选择（表示、Gate 特征、阈值）不得依据 target=held_out 的结果。
+    held_out 仅在 Gate/策略冻结后评测一次。
+
+dev_targets: [plate_1, plate_2, plate_3]
+
+fairness:
+  n_init_main: 20
+  n_init_si: [10]
+  budget_main: 100
+  budget_si: [50]
+  # 主文锁死 EI：迁移对比归因于策略，而非采集调参
+  acquisition: ei
+  acquisition_note: >
+    Acquisition can modulate transfer magnitude and edge-case signs.
+    Main grids must use EI only. Run UCB sensitivity in SI before paper
+    (see si_checks.acquisition_sensitivity). Do not full-grid both EI and UCB.
+  batch_size: 1
+  n_seeds: 20
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  source_fractions_main: [1.0]
+  source_fractions_scan: [0.1, 0.5, 1.0]
+  backend_main: sklearn
+  max_warm_points: 150
+
+# 成文前必须勾掉的敏感性（防忘记）
+si_checks:
+  acquisition_sensitivity:
+    status: done  # pending | running | done
+    acquisition: ucb
+    n_seeds: 20
+    budget: 100
+    purpose: >
+      Check whether main transfer conclusions (label helpful; diversity_warm harmful)
+      survive under UCB. Report absolute shifts; flag ranking flips.
+    suggested_pairs:
+      - {strategy: label_warm, representation: morgan, source: plate_3, target: plate_2, reason: strongest_positive}
+      - {strategy: diversity_warm, representation: morgan, source: plate_1, target: plate_3, reason: strong_negative}
+      - {strategy: label_warm, representation: morgan, source: plate_1, target: plate_3, reason: weak_edge_case}
+    pass_rule: >
+      Label transfer still generally >= cold; diversity_warm still not systematically better.
+      Large flips => disclose acquisition dependence in main text.
+    output_dir: results/si
+    runner: scripts/run_si_suite.py
+    completed: "2026-07-30; 380/380; main conclusions survive (edge pair soft flip only)"
+  source_fraction_scan:
+    status: done
+    fractions: [0.1, 0.5, 1.0]
+    note: "1.0 taken from main EI grid; 0.1/0.5 re-run via run_si_suite; more source labels generally help on positive pairs"
+  budget_si:
+    status: done
+    budget: 50
+  n_init_si:
+    status: done
+    n_init: 10
+  stats:
+    status: done
+    script: scripts/summarize_stats.py
+    output_dir: results/stats
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  # 相对 cold-start 的加速比阈值
+  positive_transfer_min: 1.05
+  negative_transfer_max: 0.95
+
+representations_main: [ohe, morgan, fragprint]
+strategies_main: [random, cold_start, diversity_warm, label_warm, multitask]
+strategies_raised: [transfer_gate]
+
+go_nogo:
+  week5_min_signal: >
+    开发折上 morgan+label_warm 相对 cold 若普遍加速比落在 [0.95,1.05]
+    且 diversity 无优势，先排查泄漏/标准化，再考虑收缩。
+  week8_gate: >
+    Gate 须相对「永远 label_warm」降低负迁移，且平均不差于 cold，才进入跨域主攻。
+  week8_gate_decision: "No-Go (2026-07-29): Gate ≈ always label on plate_4; keep as failure analysis only."
+  next_priorities:  # 与计划书 §14 / 详细执行方案 §5.5 对齐
+    - P0_finish_SI_and_freeze
+    - P1_mechanism_and_hierarchical_stats
+    - P2_external_HTE_SURF
+    - P3_real_multitask
+    - P4_gate_only_after_more_tasks
+  forbid_homogeneous_grid_expansion: true

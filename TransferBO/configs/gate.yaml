@@ -1,0 +1,50 @@
+# TransferGate config (W6–8)
+
+experiment:
+  name: gate
+  output_dir: results
+
+gate:
+  model_dir: results/gate/freeze_W8
+  neg_threshold: 0.45
+  min_gain: 0.02
+
+data:
+  processed_path: data/processed/additives_four_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 2048
+  fragprint:
+    radius: 2
+    n_bits: 2048
+
+strategy:
+  name: transfer_gate
+  n_init: 20
+  batch_size: 1
+
+bo:
+  budget: 100
+  acquisition: ei
+  ucb_beta: 2.0
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_plate: plate_1
+  target_plate: plate_2
+  source_fraction: 1.0
+  max_warm_points: 150
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true

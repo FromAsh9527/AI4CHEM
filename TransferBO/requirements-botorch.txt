@@ -1,0 +1,4 @@
+# 可选：BoTorch / GPyTorch 后端（configs 中 bo.backend: botorch）
+torch>=2.0
+gpytorch>=1.11
+botorch>=0.9

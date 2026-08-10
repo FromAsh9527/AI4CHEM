@@ -32,11 +32,29 @@ __pycache__/
 # 百度网盘同步冲突副本
 *冲突文件*
 
-# TransferBO：默认本地；描述符特征表可入库（其余仍由子目录 .gitignore 约束）
+# TransferBO：默认忽略；仅放行代码、配置与数据文件
+# （不入库：results / exports / docs 图文稿 / third_party 等）
 TransferBO/**
 !TransferBO/.gitignore
+!TransferBO/README.md
+!TransferBO/pyproject.toml
+!TransferBO/requirements.txt
+!TransferBO/requirements-botorch.txt
+!TransferBO/scripts/
+!TransferBO/scripts/**
+!TransferBO/src/
+!TransferBO/src/**
+!TransferBO/configs/
+!TransferBO/configs/**
+!TransferBO/tests/
+!TransferBO/tests/**
 !TransferBO/data/
-TransferBO/data/**
 !TransferBO/data/README.md
 !TransferBO/data/descriptors/
 !TransferBO/data/descriptors/**
+!TransferBO/data/processed/
+!TransferBO/data/processed/**
+!TransferBO/data/raw/
+!TransferBO/data/raw/**
+# 原始超大外部表仍本地保留
+TransferBO/data/raw/external/BH_HTE_Curated_Dataset_v20260219.csv

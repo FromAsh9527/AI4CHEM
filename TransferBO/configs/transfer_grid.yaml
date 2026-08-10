@@ -1,0 +1,50 @@
+# W3 跨板迁移主实验（开发折：plate_1/2/3；禁止用 plate_4 调参）
+# 表示：基于 W1，主用 morgan + drfp（ohe 作阴性对照可另开）
+
+experiment:
+  name: transfer_grid
+  output_dir: results/transfer_grid
+
+data:
+  processed_path: data/processed/additives_four_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+grid:
+  strategies: [cold_start, diversity_warm, label_warm, multitask]
+  representations: [morgan, drfp]
+  plates: [plate_1, plate_2, plate_3]
+  include_same_plate: false
+
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 2048
+  drfp:
+    n_bits: 2048
+
+strategy:
+  name: label_warm
+  n_init: 20
+  batch_size: 1
+  init_mode: random
+
+bo:
+  budget: 100
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_fraction: 1.0
+  # Exact GP on 720 source points is too slow; subsample for tractability
+  max_warm_points: 150
+
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true
