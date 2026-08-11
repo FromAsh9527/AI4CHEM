@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-"""Build advisor briefing PPT + DOCX for locked EDBO Suzuki main line (v0.6).
+"""Build advisor briefing PPT + DOCX for locked EDBO Suzuki main line (v0.7).
 
 PPT structure: experimental design → purpose → results → data analysis.
+v0.7 adds W8 amination full-grid (family-dependent boundary).
 """
 
 from __future__ import annotations
@@ -23,8 +24,10 @@ ROOT = Path(__file__).resolve().parents[1]
 FIGS = ROOT / "docs" / "figs" / "main"
 ESI = ROOT / "docs" / "figs"
 OUT_DIR = ROOT / "docs" / "briefings"
-PPT_OUT = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.6.pptx"
-DOC_OUT = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.6.docx"
+PPT_OUT = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.7.pptx"
+DOC_OUT = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.7.docx"
+PPT_ALIAS = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.6.pptx"
+DOC_ALIAS = OUT_DIR / "汇报_TransferBO_EDBO_Suzuki_v0.6.docx"
 
 # Design — clean academic, not purple-glow AI default
 INK = PRGB(0x1A, 0x1F, 0x2E)
@@ -36,7 +39,7 @@ ACCENT = PRGB(0x1F, 0x6B, 0x5B)  # deep teal-green
 ACCENT2 = PRGB(0xB5, 0x3D, 0x2B)  # terracotta for negative/warn
 NAVY = PRGB(0x2F, 0x4B, 0x7C)
 FONT = "Microsoft YaHei"
-TOTAL = 20
+TOTAL = 22
 
 
 def _ea(run):
@@ -192,7 +195,7 @@ def build_ppt() -> Path:
         [
             "结构：实验设计 → 实验目的 → 实验结果 → 数据分析",
             "验证链：C1（多表示）→ S0（匹配 init）→ A2（秩池化）→ A3（源降权）+ 边界库对照",
-            "阶段：主验证与稳健性检验已闭环 · 2026-08",
+            "阶段：主验证闭环 + 第二家族边界（amination 全量）· 2026-08",
         ],
         size=15,
         color=MUTED,
@@ -205,10 +208,10 @@ def build_ppt() -> Path:
     header(s, "00  目录", "本次汇报结构")
     items = [
         ("一、问题与目的", "科学问题、总体实验目的、阶段结论边界"),
-        ("二、实验设计", "体系 / 协议 / 方法阶梯 / 计算网格 / 分析协议"),
-        ("三、实验结果", "C1 · S0 · A2 · A3 主数字与主图"),
-        ("四、数据分析", "预算窗口 · 异质性 · A3 sanity · 假设检验表"),
-        ("五、边界与收束", "边界库对照 · 本阶段范围 · 待讨论"),
+        ("二、数据与设计", "库来源/结构 · 协议 · 方法阶梯 · 分析协议"),
+        ("三、实验结果", "C1 · S0 · A2 · A3 · amination 主数字"),
+        ("四、数据分析", "预算窗口 · 异质性 · A3 sanity · 假设检验"),
+        ("五、边界与收束", "Doyle / PK2022 / amination · 结论 · 待讨论"),
     ]
     y = 1.55
     for title, body in items:
@@ -249,9 +252,75 @@ def build_ppt() -> Path:
         add_text(s, left + 0.2, 4.25, 3.3, 2.0, body.split("\n"), size=14, color=INK, space_after=4)
     add_footer(s, page)
 
+    # ---------- 03b 数据来源与结构 ----------
+    s = new()
+    header(s, "02  数据", "本工作用到的共享条件库：来源与结构")
+    section_chip(s, "设计")
+    add_text(
+        s,
+        0.7,
+        1.5,
+        11.9,
+        0.35,
+        "共同点：离散候选集 X 跨任务共享；任务身份（底物/变体）不写入 X。差别在 X 的因子维数与化学问题。",
+        size=12,
+        color=MUTED,
+    )
+    # header row
+    add_rect(s, 0.55, 1.95, 12.2, 0.42, fill=NAVY, line=None, radius=False)
+    headers = [
+        (0.65, 2.0, "数据集", 2.0),
+        (2.7, 2.0, "来源", 2.6),
+        (5.4, 2.0, "共享 X", 2.4),
+        (7.9, 2.0, "任务 =", 2.0),
+        (10.0, 2.0, "规模 / 角色", 2.5),
+    ]
+    for left, top, txt, w in headers:
+        add_text(s, left, top, w, 0.3, txt, size=11, color=CARD, bold_first=True)
+    rows = [
+        (
+            "EDBO Suzuki",
+            "Shields et al.\nNature 2021",
+            "L×B×Sol\n≈308 条件",
+            "底物对\n(E + N)",
+            "8 靶 · 主验证",
+        ),
+        (
+            "EDBO amination",
+            "同 EDBO2021\naryl_amination",
+            "Add×Base×Lig\n≈260 条件",
+            "芳基卤\n底物",
+            "8 板 · 第二家族",
+        ),
+        (
+            "Doyle2018",
+            "Ahneman et al.\nScience 2018\n(BH CN HTE)",
+            "L×B×Add\n≈240 条件",
+            "芳基卤\n底物",
+            "15×240 · 外部边界",
+        ),
+        (
+            "PK2022",
+            "Prieto–Kullmer\nScience 2022\n(CHAOS 四板)",
+            "添加剂一维\n≈720 / 板",
+            "反应变体\nplate_1–4",
+            "4×720 · 1D 边界",
+        ),
+    ]
+    y = 2.45
+    for name, src, x, task, role in rows:
+        add_rect(s, 0.55, y, 12.2, 1.05, fill=CARD, line=LINE)
+        add_text(s, 0.65, y + 0.2, 2.0, 0.7, name, size=12, color=ACCENT, bold_first=True)
+        add_text(s, 2.7, y + 0.12, 2.6, 0.85, src.split("\n"), size=11, color=INK, space_after=1)
+        add_text(s, 5.4, y + 0.12, 2.4, 0.85, x.split("\n"), size=11, color=INK, space_after=1)
+        add_text(s, 7.9, y + 0.12, 2.0, 0.85, task.split("\n"), size=11, color=INK, space_after=1)
+        add_text(s, 10.0, y + 0.2, 2.5, 0.7, role, size=11, color=MUTED)
+        y += 1.1
+    add_footer(s, page)
+
     # ---------- 04 实验设计：体系与协议 ----------
     s = new()
-    header(s, "02  实验设计", "体系设定与锁定协议")
+    header(s, "03  实验设计", "体系设定与锁定协议")
     section_chip(s, "设计")
     add_pic(s, FIGS / "fig1_same_library_transfer_schematic.png", 0.55, 1.75, width=6.2)
     add_rect(s, 7.0, 1.75, 5.7, 4.85, fill=CARD, line=LINE)
@@ -331,7 +400,7 @@ def build_ppt() -> Path:
         6.5,
         11.9,
         0.4,
-        "边界 / 补充验证：另一共享库 2400 · 一维添加剂库 840 · xTB pilot 300 · 第二反应家族数据就绪（可选待跑）",
+        "边界 / 补充验证：Doyle2018（OHE≈2400）· PK2022/CHAOS（≈840）· xTB pilot · EDBO amination 全量 2560",
         size=12,
         color=MUTED,
     )
@@ -690,15 +759,93 @@ def build_ppt() -> Path:
     header(s, "14  边界对照", "设计角色：说明「并非普适禁止迁移」")
     section_chip(s, "设计+结果")
     boxes = [
-        (0.7, "另一共享条件库", "角色：外部边界对照\n协议：OHE 等\n结果：标签迁移可略正\n→ 说明并非处处负迁移"),
-        (4.7, "一维添加剂库", "角色：维度更低的补充\nX≈添加剂筛选\n结果：标签常有用；\n仅 diversity init 不稳"),
-        (8.7, "本阶段不做", "S3 task-ID / S4 MTGP\nS5 仅 init 迁移\nxTB 全量\n不为翻正结果重调协议"),
+        (
+            0.7,
+            "Doyle2018",
+            "Ahneman Science 2018\nBH CN HTE；X=L×B×Add≈240\n任务=芳基卤底物（15×240）\nlabel(OHE) pair Δ≈+0.064\n→ 外部边界：别处可正",
+        ),
+        (
+            4.7,
+            "PK2022",
+            "Prieto–Kullmer Science 2022\nCHAOS 四板；X≈添加剂720\n任务=反应变体 plate_1–4\nlabel pair Δ≈+0.13~+0.15\n→ 1D 边界：不可当主证据",
+        ),
+        (
+            8.7,
+            "EDBO amination",
+            "同 EDBO2021 第二家族\n全量 2560 已完成\nDFT +0.043；Morgan ≈0\nfamily-dependent\n→ 见下一页",
+        ),
     ]
     for left, title, body in boxes:
         add_rect(s, left, 1.8, 3.7, 4.6, fill=CARD, line=LINE)
         add_rect(s, left, 1.8, 3.7, 0.5, fill=NAVY, line=None, radius=False)
         add_text(s, left + 0.2, 1.9, 3.3, 0.35, title, size=15, color=CARD, bold_first=True)
         add_text(s, left + 0.25, 2.55, 3.2, 3.5, body.split("\n"), size=14, color=INK, space_after=7)
+    add_footer(s, page)
+
+    # ---------- 16b amination W8 ----------
+    s = new()
+    header(s, "14b  第二家族", "EDBO amination min S0：family-dependent")
+    section_chip(s, "结果+分析")
+    add_text(
+        s,
+        0.7,
+        1.55,
+        11.9,
+        0.35,
+        "协议对齐 Suzuki S0：cold vs label_warm · Morgan+DFT · 8 底物 · 20 seeds · 2560 JSON · 主终点 mean Δfrac @ B∈{30,40,50}",
+        size=12,
+        color=MUTED,
+    )
+    add_rect(s, 0.7, 2.0, 5.9, 2.55, fill=CARD, line=LINE)
+    add_rect(s, 6.85, 2.0, 5.75, 2.55, fill=CARD, line=LINE)
+    add_text(s, 0.95, 2.15, 5.4, 0.35, "Amination（pair 平均）", size=13, color=MUTED, bold_first=True)
+    add_text(
+        s,
+        0.95,
+        2.6,
+        5.4,
+        1.8,
+        [
+            "• DFT：mean +0.043（59% >+0.02）",
+            "• Morgan：mean +0.013（50% near0）",
+            "• 相对 Suzuki C1 ≈ −0.03x：符号可相反",
+        ],
+        size=14,
+        color=INK,
+        space_after=5,
+    )
+    add_text(s, 7.1, 2.15, 5.3, 0.35, "异质性（关键）", size=13, color=MUTED, bold_first=True)
+    add_text(
+        s,
+        7.1,
+        2.6,
+        5.3,
+        1.8,
+        [
+            "• 正均值被 target=sub_s4 拉高",
+            "• 去掉 s4：DFT ≈ +0.020；Morgan ≈ 0",
+            "• 不是八个底物普遍受益",
+        ],
+        size=14,
+        color=INK,
+        space_after=5,
+    )
+    add_rect(s, 0.7, 4.8, 11.9, 1.7, fill=CARD, line=LINE)
+    add_text(s, 0.95, 5.0, 11.4, 0.35, "写作口径（已锁定）", size=13, color=ACCENT, bold_first=True)
+    add_text(
+        s,
+        0.95,
+        5.45,
+        11.4,
+        0.9,
+        [
+            "不做跨家族「一致不安全默认」升级。Amination = 边界：同协议下效应可 family-dependent。",
+            "主主张仍锚定多因子 Suzuki：naive 持续池化不是安全默认；amination 说明不能外推成「处处负」。",
+        ],
+        size=14,
+        color=INK,
+        space_after=4,
+    )
     add_footer(s, page)
 
     # ---------- 17 总结论 ----------
@@ -712,8 +859,8 @@ def build_ppt() -> Path:
         11.4,
         1.35,
         [
-            "在共享多因子条件库、跨底物设定下：无 task ID 的持续历史标签池化，相对冷启动不是安全默认。",
-            "多表示同向；匹配 init 不翻号；秩变换略减负；中等源降权未稳定修复；边界库显示别处可正。",
+            "在主验证多因子共享库上：无 task ID 的持续历史标签池化，相对冷启动不是安全默认。",
+            "多表示同向负；匹配 init / 秩 / 名义降权未翻正。第二家族 amination 平均偏正/近零 → 效应 family-dependent。",
         ],
         size=15,
         color=INK,
@@ -731,7 +878,7 @@ def build_ppt() -> Path:
         [
             "• 共享 X ≠ 历史 y 可默认混用",
             "• 与 task mismatch 相一致",
-            "• 边界库可正 → 非普适禁令",
+            "• 别处/他家族可正 → 非普适禁令",
         ],
         size=14,
         color=INK,
@@ -747,7 +894,7 @@ def build_ppt() -> Path:
         [
             "• 历史数据没用 / 一切 transfer 无效",
             "• task-aware / MTGP 也必然失败",
-            "• 任意反应 / 任意降权都无效",
+            "• 任意反应家族都必然负迁移",
         ],
         size=14,
         color=INK,
@@ -768,10 +915,10 @@ def build_ppt() -> Path:
         3.9,
         [
             "• C1 / S0 / A2 / A3 全套验证",
-            "• 多表示一致性 + A3 健全性",
-            "• 异质性 / headroom / 预算窗口分析",
-            "• 边界库对照（可正迁移场景）",
-            "• 主验证与稳健性检验闭环",
+            "• Task-level 重推断 + A2/A3 审计",
+            "• 相似度机制（top-k ↔ Δfrac）",
+            "• Amination 全量 2560（W8）",
+            "• S5 / task-ID 策略臂 + 小试点",
         ],
         size=15,
         color=INK,
@@ -786,13 +933,14 @@ def build_ppt() -> Path:
         5.2,
         3.9,
         [
-            "• 第二反应家族最小验证（数据就绪）",
-            "• 或进入 task-aware 路线：",
-            "  S3 task-ID / S4 MTGP / S5 仅 init",
+            "• 扩跑 W7 nsweep / S5 / task-ID",
+            "  （现为小试点）",
+            "• 或推进更强 task-aware（MTGP）",
+            "• xTB / 边界库多表示：低优先",
             "",
             "当前阶段结论：",
-            "共享条件库上，无任务身份的",
-            "历史标签池化不是安全默认。",
+            "主库上 naive 池化非安全默认；",
+            "跨家族不可一刀切。",
         ],
         size=14,
         color=INK,
@@ -804,15 +952,15 @@ def build_ppt() -> Path:
     s = new()
     header(s, "17  待讨论", "需要确认的几点")
     qs = [
-        "1. 是否并行补跑第二反应家族最小验证，以加强跨家族泛化？",
-        "2. 下一阶段重点：继续补泛化，还是直接做 task-aware（S3–S5）？",
-        "3. S3–S5（task-ID / MTGP / 仅 init）是否作为下一阶段主攻？",
+        "1. Amination 作为 family-dependent 边界写入正文/SI，是否同意不做跨家族强升级？",
+        "2. 下一阶段是否扩跑 S5（仅 init）全网格，作为「然后怎么办」主对照？",
+        "3. 轻量 task-ID 试点已≈A1；是否值得上更强 MTGP，还是先写清局限？",
         "4. 边界库是否需要多表示重跑，还是维持现状作对照即可？",
     ]
     y = 1.6
     for q in qs:
         add_rect(s, 0.7, y, 11.9, 1.1, fill=CARD, line=LINE)
-        add_text(s, 0.95, y + 0.25, 11.4, 0.7, q, size=16, color=INK, valign=MSO_ANCHOR.MIDDLE)
+        add_text(s, 0.95, y + 0.25, 11.4, 0.7, q, size=15, color=INK, valign=MSO_ANCHOR.MIDDLE)
         y += 1.25
     add_footer(s, page)
 
@@ -828,10 +976,10 @@ def build_ppt() -> Path:
         11.5,
         2.0,
         [
-            "汇报材料：docs/briefings/",
+            "汇报材料：docs/briefings/（v0.7）",
             "数字汇总：results/paper_stats/EXPERIMENT_SUMMARY.md",
+            "Amination：edbo_amination_min_s0_SUMMARY.md",
             "结果目录：results/external_* · results/transfer_grid*",
-            "图件：docs/figs/main/ 与 docs/figs/",
         ],
         size=15,
         color=MUTED,
@@ -845,6 +993,12 @@ def build_ppt() -> Path:
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     prs.save(PPT_OUT)
+    try:
+        import shutil
+
+        shutil.copy2(PPT_OUT, PPT_ALIAS)
+    except Exception:
+        pass
     return PPT_OUT
 
 
@@ -917,6 +1071,7 @@ def add_fig(doc, path: Path, caption: str):
 
 
 def build_docx() -> Path:
+    """DOCX mirrors the advisor PPT: design → purpose → results → analysis."""
     doc = Document()
     for sec in doc.sections:
         sec.top_margin = Cm(2.4)
@@ -926,15 +1081,15 @@ def build_docx() -> Path:
 
     t = doc.add_paragraph()
     t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = t.add_run("汇报材料")
+    r = t.add_run("工作进展汇报")
     r.bold = True
     set_run_font(r, east_asia="黑体", ascii_font="Arial", size_pt=18)
 
     st = doc.add_paragraph()
     st.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r = st.add_run(
-        "共享反应条件库上的历史标签池化：\n"
-        "相对冷启动为何不是安全默认策略"
+        "共享反应条件库上的历史标签池化\n"
+        "相对冷启动不是安全默认策略"
     )
     r.bold = True
     set_run_font(r, east_asia="黑体", ascii_font="Arial", size_pt=14)
@@ -942,111 +1097,329 @@ def build_docx() -> Path:
     meta = doc.add_paragraph()
     meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r = meta.add_run(
-        "项目：TransferBO · 共享条件库迁移验证 · 2026-08\n"
-        "用途：工作进展汇报（问题、设计、结果、分析与下一步）"
+        "项目：TransferBO · 2026-08 · v0.7（含 amination 全量）\n"
+        "结构与 PPT 对齐：实验设计 → 实验目的 → 实验结果 → 数据分析"
     )
     set_run_font(r, size_pt=10.5)
     r.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
 
-    add_h(doc, "一、汇报摘要", 1)
-    add_p(
-        doc,
-        "本工作围绕「共享离散条件库、跨反应变体」设定，完成完整方法阶梯：冷启动（A0）→ 原始标签池化（A1）→ "
-        "秩/百分位池化（A2）→ 源数据降权（A3），并完成匹配初始化稳健性（S0）、多表示一致性与 A3 健全性检查，"
-        "同时用其他共享条件库与一维添加剂库作边界对照。"
-        "核心结论：无 task identity 的持续历史标签池化，相对目标板冷启动不是安全默认；"
-        "中段预算（B≈30–50）pair 平均略负；简单标度变换与中等降权未能稳定翻正。"
-        "不外推为「历史数据没用」或「一切迁移无效」。"
-        "主验证与稳健性检验已闭环；S3/S4/S5 与 xTB 全量不纳入本阶段。",
-    )
-
-    add_h(doc, "二、科学问题", 1)
+    add_h(doc, "一、问题与目的", 1)
     add_p(
         doc,
         "同一套离散反应条件库更换底物或反应变体时，历史产率要不要直接喂给新任务的贝叶斯优化？"
-        "共享候选集 X 并不意味着共享响应函数 y(x)。我们锁定的可操作问题是：",
+        "共享候选集 X 并不意味着共享响应函数 y(x)。",
     )
     add_p(
         doc,
-        "相对冷启动，无任务身份、持续并入历史标签的池化，是不是安全默认？",
+        "可操作问题：相对目标板冷启动，无 task ID、持续并入历史标签的池化，是不是安全默认？",
         bold=True,
     )
+    add_p(doc, "不是在问：历史数据有没有用、一切迁移是否无效、或多任务 GP 会不会成功。", indent=True)
+    add_bul(doc, "总体目的：在共享条件库、跨反应变体设定下，量化无任务身份标签池化的利 / 零 / 害。")
+    add_bul(doc, "验证布局：多因子条件库为主验证；多表示 + 稳健性阶梯；外加边界库对照。")
+    add_bul(doc, "阶段结论：不是安全默认；解读为 consistent with task mismatch（非唯一机制断言）。")
 
-    add_h(doc, "三、证据与协议", 1)
-    add_bul(doc, "主验证：多因子共享条件库（配体×碱×溶剂）；任务=不同底物（不在 X）；308 条件 × 8 板 → 56 有向 pair。")
-    add_bul(doc, "协议：GP–EI；n_init=20；B=100；源标签不占目标预算；无 task ID。")
-    add_bul(doc, "表示：Morgan / DRFP / 条件 DFT（多表示交叉验证）。")
-    add_bul(doc, "推断：pair 平均 + bootstrap CI；主窗口 B=30–50；B=100 为天花板对照。")
-    add_bul(doc, "边界对照：另一共享条件库、一维添加剂库（显示别处可出现正迁移）。")
-
-    add_h(doc, "四、方法阶梯与结果", 1)
-    add_tbl(
-        doc,
-        ["臂", "做法", "相对冷启动（要点）"],
-        [
-            ["A0", "目标板冷启动", "强基线；中段已有较高 frac"],
-            ["A1", "原始标签池化", "B=40：Morgan/DRFP/DFT ≈ −0.041/−0.036/−0.036"],
-            ["S0", "匹配目标 init", "略减负（如 Morgan −0.034），不翻号"],
-            ["A2", "任务内秩池化", "略减负（Morgan −0.026），仍负"],
-            ["A3", "源噪声降权 w=0.1–0.5", "≈A1；sanity PASS（非空转）"],
-        ],
-    )
-    add_fig(doc, FIGS / "fig_edbo_suzuki_C1_pair_delta_by_budget.png", "图1　C1：三表示 pair Δfrac 随预算")
-    add_fig(doc, FIGS / "fig_edbo_suzuki_s0_vs_main_pair_delta.png", "图2　S0 匹配 init 稳健性")
-    add_fig(doc, FIGS / "fig_edbo_suzuki_ladder_A1A2A3_B40.png", "图3　A1–A3 方法阶梯（B=40）")
-
-    add_h(doc, "五、A3 结果应如何表述", 1)
+    add_h(doc, "二、数据来源与结构", 1)
     add_p(
         doc,
-        "实现为 α_src=1e-4/w_s。健全性检查表明权重确实改变后验；但在 w=0.1–0.5 的实际测试档，"
-        "相对等权池化后验变化很小，约 75% 轨迹的 EI 采集路径完全相同；极端小权重才明显靠近冷启动。"
-        "因此应表述为：在测试的实际降权范围内，简单抬高源观测噪声未能稳定扭转负迁移；"
-        "而不是「降权方法永远无效」。",
+        "本工作使用四套公开高通量实验（HTE）共享条件库。共同点：离散候选集 X 在任务间共享，"
+        "而任务身份（底物或反应变体）不写入 X。差别在于 X 的因子维数与所回答的化学问题。",
+        indent=False,
+    )
+    add_tbl(
+        doc,
+        ["数据集", "来源", "共享 X", "任务定义", "规模", "角色"],
+        [
+            [
+                "EDBO Suzuki",
+                "Shields et al., Nature 2021",
+                "配体×碱×溶剂 ≈308",
+                "底物对（亲电体+亲核体）",
+                "主网格用 8 靶（全表 12 板）",
+                "主验证",
+            ],
+            [
+                "EDBO amination",
+                "同 EDBO2021 aryl_amination",
+                "添加剂×碱×配体 ≈260",
+                "芳基卤底物",
+                "8 板 × 260",
+                "第二反应家族边界",
+            ],
+            [
+                "Doyle2018",
+                "Ahneman et al., Science 2018（Buchwald–Hartwig CN HTE）",
+                "配体×碱×添加剂 ≈240",
+                "芳基卤底物",
+                "15 × 240",
+                "外部边界（OHE 等）",
+            ],
+            [
+                "PK2022",
+                "Prieto–Kullmer et al., Science 2022；CHAOS 复用四板",
+                "添加剂一维 ≈720/板",
+                "反应变体 plate_1–4",
+                "4 × 720",
+                "1D 边界 / SI",
+            ],
+        ],
+    )
+    add_p(
+        doc,
+        "层级锁定：EDBO Suzuki 为唯一主证据设定；Doyle2018 / PK2022 / EDBO amination 只作边界或对照，"
+        "不与主网格做效应量硬对齐，也不把 PK2022 的一维添加剂库当作多因子条件库主证据。",
+        indent=False,
+    )
+    add_bul(doc, "Doyle2018（label_warm, OHE）：pair 平均 Δfrac ≈ +0.064（CI 不含 0）→ 别处可正。")
+    add_bul(doc, "PK2022/CHAOS（label_warm）：Morgan/DRFP pair 平均 Δfrac ≈ +0.13 / +0.15 → 标签常有用；diversity-only 不稳。")
+    add_bul(doc, "备注：CHAOS 指 Ranković 等对 PK2022 板的复用/BO 工作流，不是库名本身。")
+
+    add_h(doc, "三、实验设计", 1)
+    add_h(doc, "3.1 体系与协议", 2)
+    add_fig(
+        doc,
+        FIGS / "fig1_same_library_transfer_schematic.png",
+        "图1　共享条件库上历史标签池化示意",
+    )
+    add_bul(doc, "设定：共享离散条件库 X；主验证为多因子（配体 × 碱 × 溶剂）。")
+    add_bul(doc, "任务 = 不同底物 / 反应变体（底物身份不写入 X）；约 308 条件 × 8 板 → 56 有向 pair。")
+    add_bul(doc, "代理：GP Matérn(ν=2.5) + White；采集 EI；normalize_y=True。")
+    add_bul(doc, "n_init=20；B=100 目标查询；源标签不计入目标预算；seeds=0…19；无 task ID。")
+
+    add_h(doc, "3.2 方法阶梯：每臂检验什么", 2)
+    add_tbl(
+        doc,
+        ["臂", "做法", "实验目的（检验假设）", "角色"],
+        [
+            ["A0 冷启动", "不用历史", "建立强目标板基线", "对照"],
+            ["A1 原始池化", "源 y 直接混入同一 GP", "产率是否可交换？", "主效应 C1"],
+            ["S0 匹配 init", "冷/池化共享目标 init", "负迁移是否只是 init 错配？", "稳健性"],
+            ["A2 秩池化", "任务内百分位后再池化", "是否主要是标度问题？", "机制排除"],
+            ["A3 源降权", "α_src=1e-4/w_s", "中等可靠性收缩是否够？", "简单补救"],
+        ],
     )
 
-    add_h(doc, "六、结论解读边界", 1)
-    add_p(doc, "当前支持：", bold=True, indent=False)
-    add_bul(doc, "在共享多因子条件库、跨底物设定下，task-agnostic 持续标签池化不是安全默认。")
-    add_bul(doc, "结果与 task mismatch 相一致，但不断言唯一机制。")
-    add_bul(doc, "边界库显示别处可正迁移——不是普适禁令。")
-    add_p(doc, "不宜外推：", bold=True, indent=False)
-    add_bul(doc, "历史数据没用；一切 transfer 无效；MTGP 也必然无效。")
-    add_bul(doc, "所有反应家族都负迁移（第二反应家族尚未跑完）。")
-    add_bul(doc, "任意权重下降权都无效；不同库效应量不宜直接横比合并。")
+    add_h(doc, "3.3 计算网格", 2)
+    add_tbl(
+        doc,
+        ["网格", "规模", "内容", "目的"],
+        [
+            ["C1 多表示", "7200", "cold+label × Morgan/DRFP/DFT", "主效应；是否表示特异"],
+            ["S0 匹配 init", "2560", "多表示；init 100% 匹配", "排除初始化伪影"],
+            ["A2 秩池化", "2240", "百分位秩后再池化", "排除纯标度解释"],
+            ["A3 源降权", "6720", "w∈{0.1,0.25,0.5}×多表示", "检验简单可靠性收缩"],
+        ],
+    )
+    add_p(
+        doc,
+        "边界 / 补充验证：Doyle2018（约 2400）、PK2022/CHAOS（约 840）、xTB pilot；"
+        "第二反应家族 EDBO amination 全量 2560（已完成）。",
+        indent=False,
+    )
 
-    add_h(doc, "七、进度与下一步", 1)
+    add_h(doc, "3.4 数据分析协议", 2)
+    add_bul(doc, "指标：frac(B)=已见最佳产率/板上最优；Δfrac = label − cold；主报 pair 平均 Δfrac。")
+    add_bul(doc, "推断单位：有向 source→target pair（N≈56）；seed 估算法波动；禁止把轨迹当 IID。")
+    add_bul(doc, "预算窗口：主窗口 B=30/40/50；B=100 为天花板对照（中段仍有 headroom）。")
+    add_bul(doc, "CI：对 pair 做 bootstrap；同时报 n_pos / n_neg / n_near0。")
+    add_bul(doc, "主网格曾存在 init 不匹配 → 必须以 S0 复核；A2/A3 相对 S0 cold 比较。")
+    add_bul(doc, "不因追求正向结果改协议或挑选 pair。")
+
+    add_h(doc, "四、实验结果", 1)
+    add_h(doc, "4.1 C1：原始池化 vs 冷启动（多表示）", 2)
+    add_p(doc, "目的：在锁定协议下，量化无任务身份原始标签池化的平均效应。", indent=False)
+    add_fig(
+        doc,
+        FIGS / "fig_edbo_suzuki_C1_pair_delta_by_budget.png",
+        "图2　C1：多表示 pair Δfrac 随预算",
+    )
+    add_tbl(
+        doc,
+        ["表示", "B=40 Δfrac", "备注"],
+        [
+            ["Morgan", "−0.041", "中段 CI 多不含 0"],
+            ["DRFP", "−0.036", "与 Morgan 高度同向"],
+            ["DFT", "−0.036", "表示间相关 r≳0.86"],
+        ],
+    )
+    add_p(doc, "B=30 同向略负；B=100 压缩至约 −0.01（冷启动接近天花板）。", indent=False)
+
+    add_h(doc, "4.2 S0：匹配目标板初始化", 2)
+    add_p(doc, "目的：排除「冷/池化 init 不匹配」造成的伪负迁移。", indent=False)
+    add_fig(
+        doc,
+        FIGS / "fig_edbo_suzuki_s0_vs_main_pair_delta.png",
+        "图3　S0 匹配 init 稳健性",
+    )
+    add_bul(doc, "设计：先采目标板 init；源采样 RNG 与目标分离 → 同 (target, seed) 匹配 100%。")
+    add_bul(doc, "B=40：Morgan Main −0.041 → S0 −0.034；DFT Main −0.036 → S0 −0.030。")
+    add_bul(doc, "分析：略减负，符号不翻；init 错配会放大，但不是负迁移主因。")
+
+    add_h(doc, "4.3 A2：任务内秩 / 百分位池化", 2)
+    add_p(
+        doc,
+        "目的：若伤害主要来自不同任务产率标度不可比，则秩变换应明显修复。"
+        "设计：任务内将 y 转为百分位秩，再在秩空间做与 A1 相同的无 task ID 池化。",
+    )
+    add_bul(doc, "B=40 vs S0 cold：A1 raw Morgan/DFT ≈ −0.034/−0.030；A2 rank ≈ −0.026/−0.029。")
+    add_bul(doc, "略减负、未翻正 → 排除「只是产量标度」的单一解释。")
+
+    add_h(doc, "4.4 A3：源标签噪声降权", 2)
+    add_p(doc, "目的：中等源降权能否在无 task ID 设定下稳定扭转负迁移？", indent=False)
+    add_fig(
+        doc,
+        FIGS / "fig_edbo_suzuki_ladder_A1A2A3_B40.png",
+        "图4　A1–A3 方法阶梯（B=40，相对 S0 cold）",
+    )
+    add_bul(doc, "设计：α_src=1e-4/w_s，w∈{0.1, 0.25, 0.5}。")
+    add_bul(doc, "B=40：A3 各档 ≈ A1（约 −0.03x），几乎重合。")
+    add_bul(doc, "口径：测试档未修复；不是「降权永远无效」。")
+
+    add_h(doc, "五、数据分析", 1)
+    add_h(doc, "5.1 为何主窗口是 B=30–50", 2)
+    add_fig(
+        doc,
+        ESI / "fig_edbo_suzuki_headroom_vs_delta_frac_B40.png",
+        "图5　headroom 与 Δfrac（B=40）",
+    )
+    add_bul(doc, "多表示同向 → 不是单一指纹特例。")
+    add_bul(doc, "中段伤害最大，此时仍有 headroom；B=100 终值差异被天花板压缩。")
+    add_bul(doc, "故「接近零@100」≠「池化无害」。")
+
+    add_h(doc, "5.2 A3 健全性", 2)
+    add_bul(doc, "实现核对：权重进入 GP 对角噪声，接线真实，非空转。")
+    add_bul(doc, "后验探针：w=0.1 vs 1 时 max|Δμ| 约 0.05；极端小 w 才明显靠近 cold。")
+    add_bul(doc, "轨迹：约 73%–78% 的 pair×seed 在 w=0.1–0.5 间采集路径相同。")
+    add_p(
+        doc,
+        "结论口径：中等噪声膨胀未能一致优于原始池化；早期 n_s≫n_t 时源点仍被高度信任。"
+        "不把 w→0（≈退回冷启动）当作有效方法臂。",
+    )
+
+    add_h(doc, "5.3 Pair 异质性", 2)
+    add_fig(
+        doc,
+        ESI / "fig_edbo_suzuki_morgan_pair_delta_frac_heatmap_B40.png",
+        "图6　pair 层面 Δfrac 热图（示例表示，B=40）",
+    )
+    add_bul(doc, "效应高度 pair 依赖；正尾薄、负尾厚。")
+    add_bul(doc, "不是「一个坏 pair」，也不是「平均正、偶发负」。")
+    add_bul(doc, "实践上不能指望「换个源就默认变好」。")
+
+    add_h(doc, "5.4 假设检验综合", 2)
+    add_tbl(
+        doc,
+        ["对照", "检验假设", "结果", "排除"],
+        [
+            ["A0 vs A1", "源/目标 y 可交换", "中段平均负迁移", "原始标签可交换"],
+            ["S0", "伤害仅来自 init 错配", "仍负，略减轻", "init 为唯一原因"],
+            ["A1 vs A2", "主要是产率标度", "略减负，未翻正", "纯标度故事"],
+            ["A1 vs A3", "中等可靠性收缩够用", "≈A1，未稳定修复", "简单降权即够"],
+        ],
+    )
+    add_p(
+        doc,
+        "综合解读（非唯一证明）：与 task mismatch 一致——共享 X ⇏ 跨任务历史 y 可交换。",
+        bold=True,
+        indent=False,
+    )
+
+    add_h(doc, "六、边界对照：Doyle2018 · PK2022 · amination", 1)
+    add_bul(doc, "Doyle2018（Science 2018 BH CN）：共享 L×B×Add；label(OHE) pair Δ≈+0.064 → 外部边界，别处可正。")
+    add_bul(doc, "PK2022（Science 2022；CHAOS 四板）：一维添加剂库；label pair Δ≈+0.13~+0.15 → 1D 边界，不可当多因子主证据。")
+    add_bul(doc, "xTB 全量 / 边界库多表示重跑：本阶段不做。")
+
+    add_h(doc, "6.1 EDBO amination min S0（全量 2560）", 2)
+    add_p(
+        doc,
+        "协议对齐 Suzuki S0：cold vs label_warm；Morgan + DFT；8 底物；20 seeds；"
+        "主终点为 B∈{30,40,50} 的 mean Δfrac。",
+        indent=False,
+    )
+    add_tbl(
+        doc,
+        ["表示", "mean Δfrac", "median", "n_pos / n_neg / n_near0（56 pairs）"],
+        [
+            ["DFT", "+0.043", "+0.029", "33 / 8 / 15"],
+            ["Morgan", "+0.013", "+0.005", "15 / 13 / 28"],
+            ["Suzuki C1（对照）", "≈ −0.034 ~ −0.037", "—", "正尾薄、负尾厚"],
+        ],
+    )
+    add_bul(doc, "DFT 平均略正；Morgan 一半 near0，谈不上可靠增益。")
+    add_bul(
+        doc,
+        "异质性：正均值被 target=sub_s4 拉高（DFT≈+0.20）。去掉 s4 后 DFT≈+0.020、Morgan≈0。",
+    )
+    add_bul(
+        doc,
+        "写作口径：不做跨家族「一致不安全默认」升级；amination 证明效应可 family-dependent；"
+        "主主张仍锚定多因子 Suzuki。",
+    )
+
+    add_h(doc, "七、阶段结论与解读边界", 1)
+    add_p(
+        doc,
+        "在主验证多因子共享库上：无 task ID 的持续历史标签池化，相对冷启动不是安全默认。"
+        "多表示同向负；匹配 init / 秩 / 名义降权未翻正。"
+        "第二家族 amination 平均偏正/近零且高度靶依赖 → 跨家族不可一刀切。",
+    )
+    add_p(doc, "当前支持的解读：", bold=True, indent=False)
+    add_bul(doc, "共享 X ≠ 历史 y 可默认混用。")
+    add_bul(doc, "与 task mismatch 相一致。")
+    add_bul(doc, "别处/他家族可正 → 非普适禁令。")
+    add_p(doc, "不宜外推：", bold=True, indent=False)
+    add_bul(doc, "历史数据没用 / 一切 transfer 无效。")
+    add_bul(doc, "task-aware / MTGP 也必然失败。")
+    add_bul(doc, "任意反应家族都必然负迁移。")
+
+    add_h(doc, "八、进度与待讨论", 1)
     add_tbl(
         doc,
         ["事项", "状态"],
         [
-            ["C1/S0/A2/A3 + 分析图", "完成"],
-            ["A3 健全性检查", "PASS"],
-            ["边界库对照", "完成"],
-            ["S3/S4/S5、xTB 全量", "本阶段不做"],
-            ["第二反应家族最小验证", "数据就绪；可选"],
+            ["C1 / S0 / A2 / A3 全套验证", "完成"],
+            ["Task-level 重推断 + A2/A3 审计", "完成"],
+            ["相似度机制（top-k ↔ Δfrac）", "完成"],
+            ["Amination 全量 2560", "完成；family-dependent"],
+            ["S5 / task-ID 策略 + 小试点", "完成（未扩全网格）"],
+            ["xTB 全量 / 边界多表示重跑", "本阶段不做"],
         ],
     )
-    add_p(doc, "待确认：", bold=True, indent=False)
-    add_bul(doc, "是否并行补跑第二反应家族最小验证？")
-    add_bul(doc, "下一阶段优先：补泛化还是做 task-aware（S3–S5）？")
-    add_bul(doc, "边界库是否需要多表示重跑，还是维持现状？")
+    add_p(doc, "待讨论：", bold=True, indent=False)
+    add_bul(doc, "Amination 作为边界写入正文/SI，是否同意不做跨家族强升级？")
+    add_bul(doc, "是否扩跑 S5（仅 init）全网格，作为「然后怎么办」主对照？")
+    add_bul(doc, "轻量 task-ID 试点≈A1；是否上更强 MTGP，还是先写清局限？")
+    add_bul(doc, "边界库是否需要多表示重跑，还是维持现状作对照即可？")
 
-    add_h(doc, "八、材料路径", 1)
-    add_bul(doc, "本汇报 PPT/DOCX：docs/briefings/")
+    add_h(doc, "九、材料路径", 1)
+    add_bul(doc, "本汇报 PPT/DOCX：docs/briefings/（v0.7）")
     add_bul(doc, "数字汇总：results/paper_stats/EXPERIMENT_SUMMARY.md")
-    add_bul(doc, "结果目录：results/external_* / results/transfer_grid*")
+    add_bul(doc, "Amination：results/paper_stats/edbo_amination_min_s0_SUMMARY.md")
+    add_bul(doc, "结果目录：results/external_* · results/transfer_grid*")
     add_bul(doc, "图件：docs/figs/main/ 与 docs/figs/")
 
     add_p(doc, "—— 汇报完 ——", indent=False, center=True)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     doc.save(DOC_OUT)
+    try:
+        import shutil
+
+        shutil.copy2(DOC_OUT, DOC_ALIAS)
+    except Exception:
+        pass
     return DOC_OUT
 
 
 def main() -> int:
+    import sys
+
+    only = {a.lower() for a in sys.argv[1:]}
+    if "--docx-only" in only or "docx" in only:
+        doc = build_docx()
+        print("DOCX", doc)
+        return 0
     ppt = build_ppt()
-    # fix accidental typo in add_fig if any - rebuild docx carefully
     doc = build_docx()
     print("PPT ", ppt)
     print("DOCX", doc)
