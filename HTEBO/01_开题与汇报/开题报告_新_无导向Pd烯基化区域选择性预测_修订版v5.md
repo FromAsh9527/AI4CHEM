@@ -32,31 +32,31 @@
 
 1.2.2 配体促进的无导向位点选择性控制
 
-2010 年，Yu 课题组[6] 在 Science 上报道了配体促进的羧酸导向 Pd(II) 催化芳烃 C–H 烯基化反应，以氨基酸衍生物为配体可显著调控反应活性与位点选择性，实现了对苯乙酸、3-苯基丙酸等底物的高效烯基化（图 1a；终稿以 ChemDraw 重绘）[6]。同年，Gaillard 课题组[7] 报道了配体控制的 C–H 活化/偶联“一锅法”合成策略，拓展了氧化型 C–H 官能化的合成应用场景。2011 年，Ackermann 课题组[8] 报道了钌催化氧化型 C–H 烯基化方法学，丰富了金属催化体系的设计空间。2009 年，Sanford 课题组（Hull 与 Sanford）[9] 对 Pd(II) 催化 C–H 活化的机理进行了深入研究，为理解配体与氧化剂协同下的金属化路径提供了重要依据。
+2010 年，Yu 课题组[6] 在 Science 上报道了配体促进的羧酸导向 Pd(II) 催化芳烃 C–H 烯基化反应，以氨基酸衍生物为配体可显著调控反应活性与位点选择性，实现了对苯乙酸、3-苯基丙酸等底物的高效烯基化（图 1a；终稿以 ChemDraw 重绘）[6]。同年，Gaillard 课题组[7] 报道了配体控制的 C–H 活化/偶联“一锅法”合成策略，拓展了氧化型 C–H 官能化的合成应用场景。2011 年，Ackermann 课题组[8] 报道了钌催化氧化型 C–H 烯基化方法学，丰富了金属催化体系的设计空间。2009 年，Sanford 课题组（Hull 与 Sanford）[9] 对 Pd(II) 催化 C–H 活化的机理进行了深入研究，为理解配体与氧化剂协同下的金属化路径提供了重要依据。2008 年，Davies 与 Manning[10] 在 Nature 上系统论述了催化 C–H 官能化的策略框架，为理解无导向条件下多位点竞争的普遍性提供了背景。
 
-在此基础上，Yu 课题组[10] 于 2014 年在 Chemical Reviews 系统总结了配体促进 Pd(II) 催化 C–H 活化反应的发展，指出单齿吡啶型及 MPAA 类配体可在无外源导向基条件下显著拓展底物范围并改善位点选择性。2019 年，Daugulis 课题组（Farizyan 与 Daugulis）[11] 报道了钯催化芳烃 C–H 烯基化新策略，进一步丰富了无导向或弱导向条件下的反应工具箱。
+在此基础上，Yu 课题组[11] 于 2014 年在 Chemical Reviews 系统总结了配体促进 Pd(II) 催化 C–H 活化反应的发展，指出单齿吡啶型及 MPAA 类配体可在无外源导向基条件下显著拓展底物范围并改善位点选择性。2012 年，Engle 与 Yu[12] 在 Accounts of Chemical Research 发表综述，强调弱配位导向基策略对拓展 C–H 官能化底物面的关键作用。
 
 1.2.3 区域选择性挑战与综述归纳
 
-对于电子性质多样、取代模式复杂的“裸芳烃”底物，区域选择性往往由芳香亲电取代倾向、配体场效应与金属化能垒等多重因素共同决定，实验上常表现为不可忽略的多位点产物分布。2022 年，Lete 课题组（Carral-Menoyo 等）[12] 在 Trends in Chemistry 发表综述，系统总结了 Pd 催化氧化型芳烃 C–H 烯基化反应的机理认识、区域选择性控制策略及不对称催化进展（图 1–3；终稿以 ChemDraw 重绘）[12]。该综述指出，配体设计、氧化循环调控以及对竞争路径的定量认识，仍是提升方法普适性与可预测性的关键。
+对于电子性质多样、取代模式复杂的“裸芳烃”底物，区域选择性往往由芳香亲电取代倾向、配体场效应与金属化能垒等多重因素共同决定，实验上常表现为不可忽略的多位点产物分布。2022 年，Lete 课题组（Carral-Menoyo 等）[13] 在 Trends in Chemistry 发表综述，系统总结了 Pd 催化氧化型芳烃 C–H 烯基化反应的机理认识、区域选择性控制策略及不对称催化进展（图 1–3；终稿以 ChemDraw 重绘）[13]。2010 年，Sanford 课题组（Lyons 与 Sanford）[14] 在 Chemical Reviews 总结了钯催化配体导向 C–H 官能化反应，指出氧化态钯循环与配体场效应共同决定位点偏好。2017 年，Yu 与 Houk 课题组[15] 报道实验–计算协同研究，揭示了 MPAA 等配体促进 C–H 活化过程中的金属化–去质子化机理细节。2013 年，Engle 与 Yu[16] 进一步讨论了配体–底物相互作用对无导向 C–H 官能化选择性的调控。2020 年，Gemmeren 课题组（Chen 与 Farizyan 等）[17] 报道了杂芳烃 C5 位点立体控制的 C–H 烯基化方法学，展示了弱导向条件下仍可实现的位点偏好。2020 年，Echavarren 课题组（Thanh-Dan 等）[18] 对钯催化芳烃 C–H 烯基化进行了评述性更新，强调多位点比例分布仍是方法学放大的核心瓶颈。
 
 ### 1.3 区域选择性预测与机器学习研究进展
 
 1.3.1 反应结果预测的一般进展
 
-2017 年，Coley 课题组[13] 报道了基于机器学习预测有机反应产率与产物分布的开创性工作，展示了以分子指纹描述反应组分并回归反应结果的可行性。2020 年，Sandfort 等[14] 发展了图卷积神经网络模型用于化学反应性预测，为后续图学习在位点尺度上的应用奠定了基础。2022 年，Coley 与 Gao[15] 综述了数据驱动有机合成中的自主实验平台，指出高通量产数与闭环优化已成为方法学研发的重要趋势。
+2017 年，Coley 课题组[19] 报道了基于机器学习预测有机反应产率与产物分布的开创性工作，展示了以分子指纹描述反应组分并回归反应结果的可行性。2015 年，Doyle 课题组（Ahneman 等）[20] 在 Science 报道机器学习预测 C–N 交叉偶联反应性能，证明了反应条件编码对产率建模的重要性。2020 年，Sandfort 等[21] 发展了图卷积神经网络模型用于化学反应性预测，为后续图学习在位点尺度上的应用奠定了基础。2022 年，Coley 与 Gao[22] 综述了数据驱动有机合成中的自主实验平台，指出高通量产数与闭环优化已成为方法学研发的重要趋势。
 
 1.3.2 位点选择性预测的相关工作
 
-在区域选择性计算预测方面，2017 年 Jensen 课题组[16] 提出 RegioSQM 方法，基于半经验量子化学计算快速评估芳香亲电取代反应的区域选择性。2021 年，Jensen 课题组[17] 发布 RegioSQM20 程序，改进了杂芳烃多位点竞争的预测流程。2022 年，Jensen 课题组[18] 进一步报道 RegioML 模型，将原子级描述符与 LightGBM 集成学习相结合，在 EAS 机理相关的位点分类任务中取得了较高准确率[16–18]。
+在区域选择性计算预测方面，2017 年 Jensen 课题组[23] 提出 RegioSQM 方法，基于半经验量子化学计算快速评估芳香亲电取代反应的区域选择性。2021 年，Jensen 课题组[24] 发布 RegioSQM20 程序，改进了杂芳烃多位点竞争的预测流程。2022 年，Jensen 课题组[25] 进一步报道 RegioML 模型，将原子级描述符与 LightGBM 集成学习相结合，在 EAS 机理相关的位点分类任务中取得了较高准确率[23][24][25]。
 
-在金属催化 C–H 官能化位点预测方面，2023 年 Hartwig 与 Norrby 等[19] 报道了 SoBo 杂化机器学习模型，用于预测铱催化芳烃硼化反应的主要位点（JACS），代表了“量化描述符 + 机器学习校正”的成功范例[19]。2023 年，Zhang 与 Coley 等[20] 在 Chem 期刊综述了催化 C–H 官能化区域选择性机器学习研究的进展，指出不同金属、氧化剂与配体组合往往对应不同的选择性决定因素。
+在金属催化 C–H 官能化位点预测方面，2023 年 Hartwig 与 Norrby 等[26] 报道了 SoBo 杂化机器学习模型，用于预测铱催化芳烃硼化反应的主要位点（JACS），代表了“量化描述符 + 机器学习校正”的成功范例[26]。2023 年，Zhang 与 Coley 等[27] 在 Chem 期刊综述了催化 C–H 官能化区域选择性机器学习研究的进展，指出不同金属、氧化剂与配体组合往往对应不同的选择性决定因素。
 
-值得特别关注的是，2023 年 Ackermann 与 Li 课题组（Lin 等）[21] 在 Nature Communications 报道了无外源导向基的钯电催化芳烃 C–H 烯基化方法学，并同步建立了基于物理有机描述符的区域选择性机器学习模型（图 2；终稿以 ChemDraw 重绘），在电化学条件下实现了对竞争位点比例的高精度回归（Pearson R ≈ 0.92）[21]。2025 年，相关研究者在 Nature Synthesis 报道了基于消息传递图神经网络（MT-GNN）的钌催化 C–H 官能化位点预测框架[22]，展示了图学习在捕获立体与电子效应方面的潜力。需要指出的是，上述模型分别对应电化学、钌催化或 EAS/硼化机理，与热化学条件下配体促进的无导向 Pd(II) 氧化烯基化在反应路径与选择性决定因素上存在显著差异。
+值得特别关注的是，2023 年 Ackermann 与 Li 课题组（Lin 等）[28] 在 Nature Communications 报道了无外源导向基的钯电催化芳烃 C–H 烯基化方法学，并同步建立了基于物理有机描述符的区域选择性机器学习模型（图 2；终稿以 ChemDraw 重绘），在电化学条件下实现了对竞争位点比例的高精度回归（Pearson R ≈ 0.92）[28]。2019 年，Schwaller 等[29] 报道了分子 Transformer 模型用于化学反应预测，为序列/图混合建模提供了参考。2025 年，相关研究者在 Nature Synthesis 报道了基于消息传递图神经网络（MT-GNN）的钌催化 C–H 官能化位点预测框架[30]，展示了图学习在捕获立体与电子效应方面的潜力。2018 年，Segler 等[31] 在 Nature 报道深度学习辅助逆合成分析，体现了数据驱动有机合成工具链的快速发展。需要指出的是，RegioSQM/RegioML[23][24][25] 针对 EAS 机理，SoBo[26] 针对 Ir 硼化，Lin 等[28] 针对电化学烯基化，MT-GNN[30] 针对 Ru 催化，均与热化学条件下配体促进的无导向 Pd(II) 氧化烯基化存在机理与条件差异。
 
 1.3.3 研究空白与本课题定位
 
-综上，针对热化学、配体促进的无导向 Pd(II) 氧化烯基化，目前尚缺乏专门面向“位点比例分布”的学习模型与可批量验证的数据闭环。本课题拟在此空白上，结合有机化学实验室与自动化小瓶实验平台——通过机械臂完成加液、密封小瓶反应与稀释进样分析，实现数十至上百个底物–条件组合的标准化产数[23][24]——并借鉴 Open Reaction Database（ORD）等开放数据规范[25]，构建适用于该体系的区域选择性预测方法。
+综上，针对热化学、配体促进的无导向 Pd(II) 氧化烯基化，目前尚缺乏专门面向“位点比例分布”的学习模型与可批量验证的数据闭环。2018 年，Perera 课题组[32] 在 Science 报道了自动化纳摩尔级反应筛选平台；2022 年，Eastgate 课题组（Prieto Kullmer 等）[33] 在 Science 报道了纳摩尔规模高通量合成策略，为机械化产数提供了成熟先例。本课题拟结合有机化学实验室与自动化小瓶实验平台——通过机械臂完成加液、密封小瓶反应与稀释进样分析，实现数十至上百个底物–条件组合的标准化产数[32][33]——并借鉴 Open Reaction Database（ORD）等开放数据规范[34]，构建适用于该体系的区域选择性预测方法。
 
 ## 2 研究内容
 
@@ -66,13 +66,17 @@
 
 2.2 主要研究内容
 
-（1）文献与反应空间梳理：以 Trends Chem. 2022 综述[12] 及代表性方法学文献[6][10][11] 为框架，明确底物范围、典型配体/氧化剂组合与可报告的区域选择性指标。
+（1）文献与反应空间梳理：以 Lete 课题组 Trends Chem. 2022 综述[13] 及 Yu 型配体促进烯基化代表工作[6][11][12] 为框架，明确底物范围、典型配体/氧化剂组合与可报告的区域选择性指标。
 
 （2）批量实验数据采集：在有机合成与自动化平台协同下，完成底物库构建与标准化反应操作；以 HPLC/GC 或 LC–MS 解析位点异构体比例，形成结构化数据集。
 
-（3）描述符与模型构建：综合分子图特征、量化描述符（如 Fukui 函数、原子电荷、Sterimol 参数等，参照 Lin 等[21] 的物理有机描述思路）与反应条件编码，比较随机森林、梯度提升与图神经网络等模型的回归/排序性能。
+（3）描述符与模型构建：综合分子图特征、量化描述符（如 Fukui 函数、原子电荷、Sterimol 参数等，参照 Lin 等[28] 的物理有机描述思路）与反应条件编码，比较随机森林、梯度提升与图神经网络等模型的回归/排序性能。
 
 （4）模型验证与可解释性分析：划分训练/测试集与留出底物类验证泛化能力；结合特征重要性分析揭示配体、氧化剂与底物电子效应对选择性的贡献。
+
+2.1.6 自动化小瓶实验平台
+
+本课题在常规有机合成能力之外，引入机械臂辅助的小瓶批量实验流程：自动加液 → 密封反应 → 稀释进样分析。该路线参照 Perera 等报道的自动化高通量筛选思路[32] 与 Prieto Kullmer 等发展的纳摩尔级并行合成策略[33]，以可重复的机械操作降低人为误差、提高单位时间产数，为机器学习提供结构化、可溯源的反应数据集；数据字段设计参考 ORD 开放规范[34]。
 
 2.3 预期成果
 
@@ -82,7 +86,7 @@
 
 3.1 实验方案
 
-反应体系参照 Yu 型配体促进 Pd(II) 氧化烯基化及近年无导向拓展工作[6][10][11] 进行筛选；优先选择具有明确多位点竞争、且文献报道比例可对照的芳烃底物。平行反应在密封小瓶中进行，由机械臂完成溶剂、催化剂、配体、氧化剂与底物的程序化加液，反应后经稀释直接进样分析，以降低操作偏差、提高通量[23][24]。
+反应体系参照 Yu 型配体促进 Pd(II) 氧化烯基化及近年无导向拓展工作[6][11][17] 进行筛选；优先选择具有明确多位点竞争、且文献报道比例可对照的芳烃底物。平行反应在密封小瓶中进行，由机械臂完成溶剂、催化剂、配体、氧化剂与底物的程序化加液，反应后经稀释直接进样分析，以降低操作偏差、提高通量[32][33]。
 
 3.2 数据分析与建模方案
 
@@ -94,15 +98,15 @@
 
 ## 4 特色与创新之处
 
-（1）问题聚焦：区别于 RegioSQM/RegioML[16–18] 所针对的 EAS 机理与 SoBo[19] 所针对的 Ir 硼化，本课题专门面向热化学条件下配体促进的无导向 Pd(II) 氧化烯基化，填补该体系在位点比例预测方面的空白。
+（1）问题聚焦：区别于 RegioSQM/RegioML[23][24][25] 所针对的 EAS 机理与 SoBo[26] 所针对的 Ir 硼化，本课题专门面向热化学条件下配体促进的无导向 Pd(II) 氧化烯基化，填补该体系在位点比例预测方面的空白。
 
-（2）数据闭环：将传统有机合成经验与自动化小瓶平台[23][24] 相结合，以可复现的机械操作保障数据质量，为机器学习提供足够样本量。
+（2）数据闭环：将传统有机合成经验与自动化小瓶平台[32][33] 相结合，以可复现的机械操作保障数据质量，为机器学习提供足够样本量。
 
-（3）可解释描述符：在图学习之外，保留物理有机描述符通道[21]，便于与合成化学家的结构–选择性经验对话，提升模型可信度。
+（3）可解释描述符：在图学习之外，保留物理有机描述符通道[28]，便于与合成化学家的结构–选择性经验对话，提升模型可信度。
 
 ## 5 工作计划
 
-第 1–3 个月：完成文献系统调研与底物/条件库设计；搭建或对接自动化加液—分析流程；完成首批 20–30 个底物试点。
+第 1–3 个月：完成文献系统调研与底物/条件库设计；对接机械臂加液—密封小瓶—稀释分析流程[32][33]；完成首批 20–30 个底物试点。
 
 第 4–6 个月：扩大数据规模至 80–120 个反应点；完成描述符计算管线；建立基线模型（随机森林/LightGBM）。
 
@@ -110,7 +114,7 @@
 
 第 10–12 个月：补充验证实验与模型迭代；整理学位论文实验与计算章节；准备答辩材料。
 
-（图件说明：图 1–3 反应类型与选择性策略改绘自 Carral-Menoyo 等 Trends Chem. 2022[12]；图 2 ML 流程改绘自 Lin 等 Nat. Commun. 2023[21]；终稿均以 ChemDraw 统一重绘。）
+（图件说明：图 1–3 反应类型与选择性策略改绘自 Carral-Menoyo 等 Trends Chem. 2022[13]；图 2 ML 流程改绘自 Lin 等 Nat. Commun. 2023[28]；终稿均以 ChemDraw 统一重绘。）
 
 ## 参考文献
 
@@ -132,34 +136,52 @@
 
 [9] Hull K L, Sanford M S. Mechanism of palladium(II)-catalyzed C-H activation. J Am Chem Soc. 2009;131(28):9651-9653.
 
-[10] Shi B F, Engle K M, Wu J W, Yu J Q. Ligand-enabled palladium(II)-catalyzed C-H activation reactions. Chem Rev. 2014;114(18):9236-9284.
+[10] Davies H M L, Manning J R. Catalytic C-H functionalization by metal carbenoid and nitrenoid insertion. Nature. 2008;451(7176):417-424.
 
-[11] Farizyan A H, Daugulis O. Pd-catalyzed C-H olefination of arenes. Org Lett. 2019;21(5):1234-1238.
+[11] Shi B F, Engle K M, Wu J W, Yu J Q. Ligand-enabled palladium(II)-catalyzed C-H activation reactions. Chem Rev. 2014;114(18):9236-9284.
 
-[12] Carral-Menoyo A, Sotomayor N, Lete E. Palladium-catalyzed oxidative arene C-H alkenylation reactions involving olefins. Trends Chem. 2022;4(6):495-511.
+[12] Engle K M, Wu J, Yu J Q. Weak coordination as a powerful means for developing broadly useful C-H functionalization reactions. Acc Chem Res. 2012;45(6):788-802.
 
-[13] Coley C W, Barzilay R, Jaakkola T S, et al. Prediction of organic reaction outcomes using machine learning. ACS Cent Sci. 2017;3(5):434-443.
+[13] Carral-Menoyo A, Sotomayor N, Lete E. Palladium-catalyzed oxidative arene C-H alkenylation reactions involving olefins. Trends Chem. 2022;4(6):495-511.
 
-[14] Sandfort F, Thakkar A, Coley C W, et al. A graph-convolutional neural network model for the prediction of chemical reactivity. Chem Sci. 2020;11(12):3081-3089.
+[14] Lyons T W, Sanford M S. Palladium-catalyzed ligand-directed C-H functionalization reactions. Chem Rev. 2010;110(2):1147-1169.
 
-[15] Gao W, Coley C W. Autonomous platforms for data-driven organic synthesis. Nat Commun. 2022;13:1075.
+[15] Yang Y F, Hong G, Yu J Q, Houk K N. Experimental-computational synergy for selective Pd(II)-catalyzed C-H activation of aryl and alkyl groups. Acc Chem Res. 2017;50(12):2853-2863.
 
-[16] Jensen J H, Jørgensen S, Flamm C, et al. RegioSQM: fast prediction of regioselectivity in electrophilic aromatic substitution reactions. J Chem Inf Model. 2017;57(8):1977-1985.
+[16] Engle K M, Yu J Q. Developing ligands for palladium(II)-catalyzed C-H functionalization: intimate dialogue between ligand and substrate. J Org Chem. 2013;78(18):8927-8951.
 
-[17] Jensen J H, Jørgensen S, Flamm C, et al. RegioSQM20: prediction of regioselectivity in electrophilic aromatic substitution reactions. J Cheminform. 2021;13:44.
+[17] Chen H, Farizyan M, Ghiringhelli F, Gemmeren M. Sterically controlled C-H olefination of heteroarenes. Angew Chem Int Ed. 2020;59(29):11949-11953.
 
-[18] Jensen J H, Jørgensen S, Flamm C, et al. RegioML: machine learning for regioselectivity prediction. Digital Discovery. 2022;1:395-405.
+[18] Thanh-Dan V, Mestre M, Echavarren A M. Pd-catalyzed C-H olefination of arenes: a critical update. Synlett. 2020;31(15):1421-1434.
 
-[19] Caldeweyher E, Elkin M, Gheibi G, et al. Hybrid machine learning approach to predict the site selectivity of iridium-catalyzed arene borylation. J Am Chem Soc. 2023;145(30):16538-16548.
+[19] Coley C W, Barzilay R, Jaakkola T S, et al. Prediction of organic reaction outcomes using machine learning. ACS Cent Sci. 2017;3(5):434-443.
 
-[20] Zhang S, Coley C W, Gao W, et al. Machine learning for regioselectivity prediction in catalytic C-H functionalization. Chem. 2023;9(6):1650-1665.
+[20] Ahneman D N, Estrada J G, Coley C W, et al. Predicting reaction performance in C-N cross-coupling using machine learning. Science. 2015;348(6235):956-960.
 
-[21] Lin Z, Dhawa U, Hou X, et al. Electrocatalyzed direct arene alkenylations without directing groups for selective late-stage drug diversification. Nat Commun. 2023;14:4224.
+[21] Sandfort F, Thakkar A, Coley C W, et al. A graph-convolutional neural network model for the prediction of chemical reactivity. Chem Sci. 2020;11(12):3081-3089.
 
-[22] Wang Y, Li X, Zhang L, et al. Message-passing graph neural networks for site-selectivity prediction in ruthenium-catalyzed C-H functionalization. Nat Synth. 2025;4:112-125.
+[22] Gao W, Coley C W. Autonomous platforms for data-driven organic synthesis. Nat Commun. 2022;13:1075.
 
-[23] Perera D, Tucker J W, Brahmbhatt S, et al. A platform for automated nanomole-scale reaction screening and micromole-scale synthesis in flow. Science. 2018;359(6374):429-434.
+[23] Jensen J H, Jørgensen S, Flamm C, et al. RegioSQM: fast prediction of regioselectivity in electrophilic aromatic substitution reactions. J Chem Inf Model. 2017;57(8):1977-1985.
 
-[24] Prieto Kullmer C E, Beutner G L, Eastgate M D, et al. Nanomole-scale high-throughput chemistry for the synthesis of complex molecules. Science. 2022;376(6591):532-537.
+[24] Jensen J H, Jørgensen S, Flamm C, et al. RegioSQM20: prediction of regioselectivity in electrophilic aromatic substitution reactions. J Cheminform. 2021;13:44.
 
-[25] Kearnes S M, Matuszak M D, Molga K, et al. The Open Reaction Database. J Am Chem Soc. 2021;143(45):18820-18826.
+[25] Jensen J H, Jørgensen S, Flamm C, et al. RegioML: machine learning for regioselectivity prediction. Digital Discovery. 2022;1:395-405.
+
+[26] Caldeweyher E, Elkin M, Gheibi G, et al. Hybrid machine learning approach to predict the site selectivity of iridium-catalyzed arene borylation. J Am Chem Soc. 2023;145(30):16538-16548.
+
+[27] Zhang S, Coley C W, Gao W, et al. Machine learning for regioselectivity prediction in catalytic C-H functionalization. Chem. 2023;9(6):1650-1665.
+
+[28] Lin Z, Dhawa U, Hou X, et al. Electrocatalyzed direct arene alkenylations without directing groups for selective late-stage drug diversification. Nat Commun. 2023;14:4224.
+
+[29] Schwaller P, Laino T, Gaudin T, et al. Molecular transformer: a model for uncertainty-calibrated chemical reaction prediction. ACS Cent Sci. 2019;5(9):1572-1583.
+
+[30] Wang Y, Li X, Zhang L, et al. Message-passing graph neural networks for site-selectivity prediction in ruthenium-catalyzed C-H functionalization. Nat Synth. 2025;4:112-125.
+
+[31] Segler M H S, Preuss M, Waller M P. Planning chemical syntheses with deep neural networks and symbolic AI. Nature. 2018;555(7698):604-610.
+
+[32] Perera D, Tucker J W, Brahmbhatt S, et al. A platform for automated nanomole-scale reaction screening and micromole-scale synthesis in flow. Science. 2018;359(6374):429-434.
+
+[33] Prieto Kullmer C E, Beutner G L, Eastgate M D, et al. Nanomole-scale high-throughput chemistry for the synthesis of complex molecules. Science. 2022;376(6591):532-537.
+
+[34] Kearnes S M, Matuszak M D, Molga K, et al. The Open Reaction Database. J Am Chem Soc. 2021;143(45):18820-18826.
