@@ -1,8 +1,35 @@
 # HTEBO 本地 ↔ Git 同步说明
 
-## 云 Agent 环境限制
+## 推荐工作方式：本地 Desktop Agent
 
-Cursor 云虚拟机**无法直接访问**百度网盘上的 `AI4CHEM/HTEBO` 本地副本。同步需你在本机完成「复制 + pull/push」或运行下方脚本。
+**开题报告、文献 PDF、ChemDraw 图件** 都在本机网盘时，请：
+
+1. 用 **Cursor Desktop** 打开本地 `AI4CHEM` 目录（含 `HTEBO/`）
+2. 在 Chat 里使用 **Agent（本地）**，不要选 **Cloud Agent**
+3. 直接让 Agent 改 `HTEBO/01_开题与汇报/` 下的 docx/md 或生成脚本
+
+Cloud Agent 仅适合改已 push 到 GitHub 的代码；**不能替代本机改开题**。
+
+## 若已用 Cloud Agent 改过仓库
+
+在本机项目目录执行：
+
+```bash
+git fetch origin
+git checkout cursor/safe-transfer-s5-plan   # 或 merge 到你自己的分支
+git pull
+```
+
+拉取后可见：
+
+- `HTEBO/01_开题与汇报/开题报告_*修订版v5.docx`（及 .md）
+- `HTEBO/01_开题与汇报/生成脚本/_build_proposal_olefination_v5.py`
+
+**不必以云上的 v5 为准**：你网盘里若有更完整的 v4，以本地 v4 为主，让本地 Agent 只改综述表述即可。
+
+## 云 Agent 环境限制（可忽略若只用本地）
+
+Cursor 云虚拟机**无法访问**百度网盘上的 `HTEBO` 本地副本。
 
 ## 推荐流程
 
