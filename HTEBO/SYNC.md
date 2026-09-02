@@ -10,6 +10,29 @@
 
 Cloud Agent 仅适合改已 push 到 GitHub 的代码；**不能替代本机改开题**。
 
+## 本机一键 push 到 GitHub
+
+在 **本机** `AI4CHEM` 仓库根目录：
+
+**Windows（网盘路径示例）**
+```bat
+cd /d F:\BaiduSyncdisk\zhangzhou\ed\AI-Pharmacy\AI4CHEM
+git fetch origin
+git checkout cursor/safe-transfer-s5-plan
+git pull origin cursor/safe-transfer-s5-plan
+REM 把你的 v4 docx 等放进 HTEBO\01_开题与汇报\ 后：
+HTEBO\push_local.bat
+```
+
+**macOS / Linux**
+```bash
+cd ~/path/to/AI4CHEM
+git fetch origin && git checkout cursor/safe-transfer-s5-plan && git pull
+bash HTEBO/push_local.sh "HTEBO: 同步本机 v4"
+```
+
+> PDF 被 `.gitignore` 排除，不会上传；docx/md/脚本会正常 push。
+
 ## 若已用 Cloud Agent 改过仓库
 
 在本机项目目录执行：
