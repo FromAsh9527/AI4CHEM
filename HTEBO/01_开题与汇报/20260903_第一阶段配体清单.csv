@@ -1,0 +1,9 @@
+ligand_id,literature_name,role,structure,CAS,formula,MW,source,action,per_vial_mg,order_now,notes
+L69,L69 (Nature 2017 SI),2017 olefination optimal,3,5-bis(trifluoromethyl)pyridin-2(1H)-one,38609-76-6,C7H3F6NO,231.09,Nature 2017 SI §3.2,buy if available else synthesize,6.93,yes,30 mol% vs 0.10 mmol arene; do not substitute 5-CF3-2-pyridone
+L1,L1 (ACS Catal 2024),2024 para,3-nitro-5-(trifluoromethyl)pyridin-2(1H)-one,33252-64-1,C6H3F3N2O3,208.10,ACS Catal 2024,BUY do not synthesize,6.24,yes,30 mol%; InChIKey JYXKHKBZLLIWEV-UHFFFAOYSA-N
+L2,L2 / L11 (JACS 2023),2024 meta bidentate,6-[2-(pyridin-2-yl)propan-2-yl]pyridin-2(1H)-one,,C13H14N2O,214.26,JACS 2023 L11; ACS Catal 2024,SYNTHESIZE 10 mmol,2.14,yes start synth,10 mol% vs 0.10 mmol olefin; S2 1H ~1.80 ppm s 6H
+L3_pyridine,L3 candidate,2024 meta monodentate,pyridine,110-86-1,C5H5N,79.10,ACS Catal 2024 text,BUY,7.91,yes,1.0 equiv; lock vs SI figure
+L3_35lutidine,L3 candidate (JACS 2023 additive),2024 meta monodentate,3,5-lutidine,591-22-0,C7H9N,107.15,JACS 2023 dual-ligand,BUY preferred,10.72,yes,often the pyridine co-ligand in Yu dual-ligand work
+L3_26lutidine,L3 placeholder in feed table,2024 meta monodentate,2,6-lutidine,108-48-5,C7H9N,107.15,feed table placeholder,BUY backup,10.72,yes,do not synthesize
+S4,L69 precursor,only if L69 not for sale,2-hydroxy-3-(trifluoromethyl)pyridine,22245-83-6,C6H4F3NO,163.10,Nature 2017 SI,BUY 5 g if synthesizing L69,,if L69 unavailable,commercial starting material for L69
+optional_5CF3,2017 screen analogue NOT the optimal ligand,do not use as 2017 reproduction,5-(trifluoromethyl)pyridin-2(1H)-one,33252-63-0,C6H4F3NO,163.10,Nature 2017 screen,optional 1 g backup only,,do not report as Nature 2017 reproduction

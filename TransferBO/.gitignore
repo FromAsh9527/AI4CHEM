@@ -18,22 +18,20 @@ venv/
 # 第三方依赖（本地保留）
 third_party/
 
-# 运行产物与汇报材料（不入库）
+# 运行产物（JSON / 离线包仍不入库）
 results/**
 !results/.gitkeep
 exports/**
-docs/**
 notebooks/**
 notes/**
-*.pptx
-*.docx
-*.png
-*.jpg
-*.jpeg
-*.svg
 *.tgz
 *.tar.gz
 *.zip
+
+# 文稿可入库：docx / md / pptx / csv / 图；PDF 由根 .gitignore 排除
+!docs/
+!docs/**
+docs/**/*.pdf
 
 # 数据：描述符 + 清洗表 + 常规 raw 可入库；超大原始表由根 .gitignore 排除
 data/raw/**
