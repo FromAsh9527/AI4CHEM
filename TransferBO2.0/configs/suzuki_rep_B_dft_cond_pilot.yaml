@@ -1,0 +1,39 @@
+# Step1b Phase B pilot — Suzuki condition DFT + substrate Morgan
+# One-axis change vs Phase A: condition_features=dft (OHE → DFT).
+# Do not mix into OHE / Phase A frozen narrative.
+
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_rep_B_dft_cond_pilot
+
+substrate_descriptor: morgan_r2
+condition_features: dft
+dft_csv: ../TransferBO/data/descriptors/edbo_suzuki_condition_dft.csv
+similarity_metric: tanimoto
+
+n_init: 5
+budget: 20
+seeds: [0, 1]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+
+# small pilot: 3 targets × 6 strategies × 2 seeds = 36 jobs
+target_substrates:
+  - suz_t1
+  - suz_t4
+  - suz_t7
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/suzuki_rep_B_dft_cond_pilot

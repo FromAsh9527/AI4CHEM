@@ -1,0 +1,17 @@
+# Leave-one-substrate-out demo grid
+db: data/db/transferbo2.db
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+# null = all substrates
+target_substrates: null
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - pooled
+  - sim_weighted
+  - contextual
+  - plate_aware
+out_dir: results/loso_demo

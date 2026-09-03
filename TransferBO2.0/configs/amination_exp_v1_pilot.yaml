@@ -1,0 +1,38 @@
+# Amination experiment v1 — PILOT (first real run)
+# Protocol: docs/06_experiment_amination_v1.md
+#
+# Scale: 5 substrates × 6 strategies × 3 seeds × budget=20
+# Includes sub_s4 (legacy positive-transfer case) + 4 others.
+
+db: data/db/transferbo2.db
+experiment_id: amination_v1_pilot
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false   # logical plate == substrate; do NOT pretend batch correction
+
+target_substrates:
+  - sub_s4    # legacy positive-transfer reference
+  - sub_s1
+  - sub_s7
+  - sub_s10
+  - sub_s15
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+# Explicitly excluded for this track:
+# - plate_aware  (plate is not a physical batch here)
+
+out_dir: results/amination_v1_pilot

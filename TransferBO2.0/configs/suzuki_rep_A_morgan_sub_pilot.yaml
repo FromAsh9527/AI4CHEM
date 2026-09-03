@@ -1,0 +1,37 @@
+# Step1b Phase A — Suzuki pilot (hard-negative)
+# Condition: OHE. Substrate: Morgan OR(elec,nuc) + Tanimoto.
+
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_rep_A_morgan_sub_pilot
+
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+
+target_substrates:
+  - suz_t1
+  - suz_t4
+  - suz_t7
+  - suz_t10
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/suzuki_rep_A_morgan_sub_pilot

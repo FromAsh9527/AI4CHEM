@@ -1,0 +1,15 @@
+# Borylation LOSO re-run with rank_median list rule (AUC layer)
+# 165 jobs = 33 targets x 1 strategy x 5 seeds
+db: data/db/transferbo2_borylation.db
+experiment_id: borylation_rankmed_audit
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+use_plate_correction: false
+rule: rank_median
+target_substrates: null
+strategies:
+  - topk_warm
+out_dir: results/borylation_rankmed_audit

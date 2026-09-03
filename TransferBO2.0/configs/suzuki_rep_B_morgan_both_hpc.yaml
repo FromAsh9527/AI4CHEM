@@ -1,0 +1,31 @@
+# Step1b Phase B — BOTH condition + substrate Morgan (Suzuki HPC full)
+# 360 jobs = 12×6×5
+
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_rep_B_morgan_both_hpc
+
+substrate_descriptor: morgan_r2
+condition_features: morgan_r2
+similarity_metric: tanimoto
+
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/suzuki_rep_B_morgan_both_full

@@ -1,0 +1,15 @@
+# Suzuki LOSO re-run with rank_median list rule (AUC layer)
+# 60 jobs = 12 targets x 1 strategy x 5 seeds
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_rankmed_audit
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+use_plate_correction: false
+rule: rank_median
+target_substrates: null
+strategies:
+  - topk_warm
+out_dir: results/suzuki_rankmed_audit

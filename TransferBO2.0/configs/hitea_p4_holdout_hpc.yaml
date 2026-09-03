@@ -1,0 +1,25 @@
+# HiTEA Suzuki P4 external holdout — FULL LOSO (docs/18_p4_hitea_holdout.md)
+# 330 jobs = 11 tasks x 6 strategies x 5 seeds
+# HPC: scripts/hpc/README_HITEA_P4_HPC.md
+db: data/db/transferbo2_hitea.db
+experiment_id: hitea_p4_holdout
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 120
+use_plate_correction: false
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+lengthscale_sub: 1.0
+target_substrates: [hit_01, hit_02, hit_03, hit_04, hit_05, hit_06, hit_07, hit_08, hit_09, hit_10, hit_11]
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - cold_random_post
+  - topk_random_post
+out_dir: results/p4_hitea/loso

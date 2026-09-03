@@ -1,0 +1,30 @@
+超算跑 amination_v1 full LOSO（TransferBO2.0）
+
+本机：
+  python scripts/hpc/pack_amination_v1_full_hpc.py
+用蓝图心算【文件管理】传到远程家目录：
+  transferbo2_amination_v1_full_hpc.tgz
+
+远程终端：
+
+  mkdir -p ~/TransferBO2.0
+  cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_amination_v1_full_hpc.tgz
+  source $HOME/miniconda3/etc/profile.d/conda.sh
+  conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+  python scripts/run_loso.py --config configs/amination_exp_v1_full.yaml --dry-run
+  # 应打印 Total jobs: 450
+
+  bash scripts/hpc/submit_amination_v1_full_dsub.sh
+
+试提交：DRY_RUN=1 bash scripts/hpc/submit_amination_v1_full_dsub.sh
+
+进度：
+  find results/amination_v1_full -name '*.json' ! -name 'loso_records.json' | wc -l
+  # 目标 450
+
+收工：
+  python scripts/run_loso.py --config configs/amination_exp_v1_full.yaml --rebuild-only
+  tar -czf ~/amination_v1_full_results.tgz results/amination_v1_full
+本机：python scripts/summarize_results.py --summary-csv results/amination_v1_full/loso_summary.csv

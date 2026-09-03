@@ -1,0 +1,21 @@
+# Post-FROZEN: amination gate smoke / full compare (topk_safe_gate vs topk vs cold)
+db: data/db/transferbo2.db
+experiment_id: amination_gate_v1
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+target_substrates: null
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - topk_safe_gate
+out_dir: results/amination_gate_v1

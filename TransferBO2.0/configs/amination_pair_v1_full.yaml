@@ -1,0 +1,20 @@
+# Pair track FULL — amination directed S→T (4350 jobs)
+# Protocol: docs/08_experiment_pair_v1.md — run only if decided after LOSO
+
+db: data/db/transferbo2.db
+experiment_id: amination_pair_v1_full
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false
+target_substrates: null
+source_substrates: null
+baseline_strategies: [random, cold_start]
+transfer_strategies: [topk_warm, nearest_topk_warm, sim_weighted, safe_gate]
+out_dir: results/amination_pair_v1_full

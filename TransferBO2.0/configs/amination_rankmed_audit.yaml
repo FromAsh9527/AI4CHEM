@@ -1,0 +1,15 @@
+# Amination LOSO re-run with rank_median list rule (strategy research step 1 -> AUC layer)
+# 75 jobs = 15 targets x 1 strategy (topk_warm) x 5 seeds
+db: data/db/transferbo2.db
+experiment_id: amination_rankmed_audit
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+use_plate_correction: false
+rule: rank_median
+target_substrates: null
+strategies:
+  - topk_warm
+out_dir: results/amination_rankmed_audit

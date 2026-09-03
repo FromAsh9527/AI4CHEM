@@ -1,0 +1,33 @@
+# Suzuki experiment v1 — PILOT (same protocol as amination_v1)
+# Protocol: docs/07_experiment_suzuki_v1.md
+# Scale: 5 tasks × 6 strategies × 3 seeds = 90
+
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_v1_pilot
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false
+
+target_substrates:
+  - suz_t1
+  - suz_t4
+  - suz_t7
+  - suz_t10
+  - suz_t12
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/suzuki_v1_pilot

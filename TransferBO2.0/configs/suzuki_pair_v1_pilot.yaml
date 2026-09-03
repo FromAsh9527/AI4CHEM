@@ -1,0 +1,23 @@
+# Pair track PILOT — Suzuki (1.0-style S→T); deferred
+# ~126 jobs
+
+db: data/db/transferbo2_suzuki.db
+experiment_id: suzuki_pair_v1_pilot
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false
+
+target_substrates: [suz_t1, suz_t7, suz_t10]
+source_substrates: [suz_t4, suz_t12, suz_t2]
+
+baseline_strategies: [random, cold_start]
+transfer_strategies: [topk_warm, nearest_topk_warm, sim_weighted, safe_gate]
+
+out_dir: results/suzuki_pair_v1_pilot

@@ -1,0 +1,74 @@
+#!/bin/bash
+# dsub: P1 amination source-subset BO LOSO (675 jobs = 15×3×3×5)
+#
+#   bash scripts/hpc/submit_p1_amination_dsub.sh
+#   DRY_RUN=1 bash scripts/hpc/submit_p1_amination_dsub.sh
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+cd "$ROOT"
+
+N_SHARDS="${N_SHARDS:-5}"
+JOB_CPU="${JOB_CPU:-16}"
+JOB_MEM_MB="${JOB_MEM_MB:-32768}"
+JOB_R_EXTRA=";mem=${JOB_MEM_MB}"
+ACCOUNT="${ACCOUNT:-root.jincjjszxyxgsiAT79}"
+DRY_RUN="${DRY_RUN:-0}"
+CONFIG="${CONFIG:-configs/amination_p1_source_robustness_hpc.yaml}"
+OUT_DIR="${OUT_DIR:-results/p1p2_source_robustness/amination}"
+
+CONDA_SH="${CONDA_SH:-$HOME/miniconda3/etc/profile.d/conda.sh}"
+if [[ ! -f "$CONDA_SH" ]]; then
+  echo "[ERROR] conda not found: $CONDA_SH"
+  exit 1
+fi
+
+mkdir -p logs/dsub scripts/hpc/dsub_jobs "$OUT_DIR"
+
+echo "[INFO] root=$ROOT shards=$N_SHARDS cpu=$JOB_CPU"
+echo "[INFO] config=$CONFIG  target: 675 under $OUT_DIR/"
+
+for sid in $(seq 0 $((N_SHARDS - 1))); do
+  job="scripts/hpc/dsub_jobs/p1_amin_${sid}.sh"
+  out="logs/dsub/p1_amin_${sid}.out"
+  err="logs/dsub/p1_amin_${sid}.err"
+  cat > "$job" <<EOF
+#!/bin/bash
+#DSUB -n tb2p1am${sid}
+#DSUB -N 1
+#DSUB -A ${ACCOUNT}
+#DSUB -R cpu=${JOB_CPU}${JOB_R_EXTRA}
+#DSUB -oo ${ROOT}/${out}
+#DSUB -eo ${ROOT}/${err}
+
+set -euo pipefail
+echo "[INFO] host=\$(hostname) date=\$(date) shard=${sid}/${N_SHARDS}"
+cd "${ROOT}"
+source "${CONDA_SH}"
+conda activate base
+export PYTHONWARNINGS=ignore
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+export PYTHONPATH="${ROOT}/src\${PYTHONPATH:+:\$PYTHONPATH}"
+
+python scripts/hpc/run_source_subset_shard.py \\
+  --config ${CONFIG} \\
+  --shard-id ${sid} \\
+  --n-shards ${N_SHARDS} \\
+  --workers ${JOB_CPU}
+
+echo "[INFO] done date=\$(date)"
+EOF
+  chmod 755 "$job"
+
+  if [[ "$DRY_RUN" == "1" ]]; then
+    echo "[DRY] would: dsub -s $job"
+  else
+    echo "[SUBMIT] amination P1 shard $sid"
+    dsub -s "$job"
+  fi
+done
+
+echo "[INFO] progress:"
+echo "  find $OUT_DIR -name '*__seed*.json' | wc -l"
+echo "  # target 675"

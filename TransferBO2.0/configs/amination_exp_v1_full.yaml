@@ -1,0 +1,23 @@
+# Amination experiment v1 — FULL LOSO (run after pilot looks sane)
+# HPC: scripts/hpc/README_AMINATION_V1_FULL_HPC.md  |  450 jobs = 15×6×5
+db: data/db/transferbo2.db
+experiment_id: amination_v1_full
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false
+target_substrates: null   # all 15
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+out_dir: results/amination_v1_full

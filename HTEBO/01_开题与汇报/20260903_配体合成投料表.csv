@@ -1,0 +1,27 @@
+ligand,step,reagent,MW,equiv,n_mmol,mass_g,vol_mL,notes
+L2_L11,1_S1,2-picoline,93.13,1.0,10,0.931,0.98,d=0.946
+L2_L11,1_S1,THF dry,,, , ,20,N2
+L2_L11,1_S1,n-BuLi 2.5M, ,1.0,10, ,4.0,-78 C 1 h then add ArF
+L2_L11,1_S1,2,6-difluoropyridine,115.08,1.0,10,1.151,0.94,d=1.226; one portion
+L2_L11,2_S2,KOtBu portion,112.21,1.0 x3,10 x3,1.122 x3, ,0 C; three cycles
+L2_L11,2_S2,MeI portion,141.94,1.0 x3,10 x3,1.419 x3,0.62 x3,d=2.28; toxic
+L2_L11,2_S2,THF,,, , ,17,
+L2_L11,3_L11,S2,216.25,1,5,1.081, ,scale to isolated S2
+L2_L11,3_L11,HCl 4N,,, , ,20-25,reflux 12 h; NaHCO3 quench
+L2_L11,3_L11,L11 product,214.26, , ,expect 0.75-1.0, ,C13H14N2O
+L69,1_S5,S4 2-OH-3-CF3-pyridine,163.10,1.0,12.25,2.00, ,
+L69,1_S5,MeCN,,, , ,7.0,65 C 5-6 h
+L69,1_S5,AcOH,60.05,1.04,12.8, ,0.80,
+L69,1_S5,NIS,224.98,1.20,14.7,3.30, ,
+L69,1_S5,Na2S2O3 10wt%,,, , ,8.0,then water 11 mL; filter
+L69,2_S6,S5,288.99,1.0,7.0,2.02, ,or use all S5
+L69,2_S6,BnBr,171.04,1.14,8.0,1.37,0.95,d=1.438
+L69,2_S6,K2CO3,138.21,1.14,8.0,1.10, ,DMF 10 mL rt overnight
+L69,3_S7,S6,379.12,1.0,5.0,1.90, ,sealed tube
+L69,3_S7,CuI,190.45,2.0,10.0,1.90, ,100 C 16 h
+L69,3_S7,Chen reagent FSO2CF2CO2Me,192.11,2.0,10.0,1.92,1.22,d~1.57
+L69,3_S7,DMF,,, , ,80,
+L69,4_L69,S7,321.22,1.0,8.75,2.81, ,literature batch; chain-scale down if less S7
+L69,4_L69,AcOH,,, , ,40,60 C 16 h H2 balloon
+L69,4_L69,20pct Pd(OH)2/C, ,0.10 Pd,0.875,0.47, ,add to solvent first; keep wet
+L69,4_L69,L69 product,231.09, , ,1.93 lit, ,Hex/EA 1:2

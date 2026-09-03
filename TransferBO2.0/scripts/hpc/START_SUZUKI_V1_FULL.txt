@@ -1,0 +1,27 @@
+超算跑 suzuki_v1 full LOSO（TransferBO2.0）
+
+本机：
+  python scripts/ingest_suzuki.py
+  python scripts/hpc/pack_suzuki_v1_full_hpc.py
+蓝图心算传到家目录：
+  transferbo2_suzuki_v1_full_hpc.tgz
+
+远程：
+
+  mkdir -p ~/TransferBO2.0 && cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_suzuki_v1_full_hpc.tgz
+  sed -i 's/\r$//' scripts/hpc/*.sh
+  source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+  python scripts/run_loso.py --config configs/suzuki_exp_v1_full.yaml --dry-run
+  # Total jobs: 360
+
+  bash scripts/hpc/submit_suzuki_v1_full_dsub.sh
+
+进度：find results/suzuki_v1_full -name '*.json' ! -name 'loso_records.json' | wc -l
+目标 360。
+
+回传：tar -czf ~/suzuki_v1_full_results.tgz results/suzuki_v1_full
+
+本机汇总（含按任务 cold vs random）：
+  python scripts/summarize_results.py --results-dir results/suzuki_v1_full --by-target

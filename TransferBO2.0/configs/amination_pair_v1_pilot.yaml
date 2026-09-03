@@ -1,0 +1,24 @@
+# Pair track PILOT — amination (1.0-style S→T); deferred until LOSO done
+# Protocol: docs/08_experiment_pair_v1.md
+# ~126 jobs
+
+db: data/db/transferbo2.db
+experiment_id: amination_pair_v1_pilot
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+use_plate_correction: false
+
+target_substrates: [sub_s4, sub_s1, sub_s10]
+source_substrates: [sub_s7, sub_s15, sub_s2]
+
+baseline_strategies: [random, cold_start]
+transfer_strategies: [topk_warm, nearest_topk_warm, sim_weighted, safe_gate]
+
+out_dir: results/amination_pair_v1_pilot

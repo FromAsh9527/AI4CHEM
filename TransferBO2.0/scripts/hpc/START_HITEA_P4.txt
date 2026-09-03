@@ -1,0 +1,30 @@
+超算跑 HiTEA Suzuki P4 holdout LOSO（TransferBO2.0）
+
+本机：
+  python scripts/hpc/pack_hitea_p4_hpc.py
+用蓝图心算【文件管理】传到远程家目录：
+  transferbo2_hitea_p4_hpc.tgz
+
+远程终端：
+
+  mkdir -p ~/TransferBO2.0
+  cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_hitea_p4_hpc.tgz
+  source $HOME/miniconda3/etc/profile.d/conda.sh
+  conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+  python scripts/run_loso.py --config configs/hitea_p4_holdout_hpc.yaml --dry-run
+  # 应打印 Total jobs: 330
+
+  DRY_RUN=1 bash scripts/hpc/submit_hitea_p4_dsub.sh
+  bash scripts/hpc/submit_hitea_p4_dsub.sh
+
+进度：
+  find results/p4_hitea/loso -name '*.json' ! -name 'loso_records.json' | wc -l
+  # 目标 330
+
+收工：
+  python scripts/run_loso.py --config configs/hitea_p4_holdout_hpc.yaml --rebuild-only
+  tar -czf ~/hitea_p4_results.tgz results/p4_hitea
+
+判定：docs/18_p4_hitea_holdout.md §4（强复现/部分复现/未复现三态）

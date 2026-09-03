@@ -1,0 +1,20 @@
+# Smoke test — small LOSO comparison
+db: data/db/transferbo2.db
+target_substrate: sub_05
+n_init: 5
+budget: 15
+seeds: [0]
+acquisition: ei
+topk: 5
+max_warm_points: 80
+use_plate_correction: true
+gate_spearman_min: 0.1
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - plate_aware
+  - safe_gate
+out_dir: results/smoke

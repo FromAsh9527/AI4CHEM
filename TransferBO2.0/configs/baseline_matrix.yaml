@@ -1,0 +1,16 @@
+# Full baseline matrix (paper-oriented; still use demo DB until real data ingested)
+db: data/db/transferbo2.db
+n_init: 5
+budget: 30
+seeds: [0, 1, 2, 3, 4]
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - pooled
+  - sim_weighted
+  - contextual
+  - plate_aware
+  - safe_gate
+out_dir: results/baseline_matrix

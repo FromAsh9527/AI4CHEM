@@ -1,0 +1,25 @@
+acquisition: ei
+budget: 20
+condition_features: ohe
+db: data/db/transferbo2_chaos.db
+experiment_id: chaos_validation
+lengthscale_sub: 1.0
+max_warm_points: 120
+n_init: 5
+out_dir: results/chaos_validation_smoke
+rule: mean
+seeds:
+- 0
+similarity_metric: tanimoto
+strategies:
+- random
+- cold_start
+- topk_warm
+- nearest_topk_warm
+- topk_random_post
+- cold_random_post
+substrate_descriptor: morgan_r2
+target_substrates:
+- plate_1
+topk: 5
+use_plate_correction: false
