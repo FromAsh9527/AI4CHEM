@@ -17,7 +17,11 @@ __pycache__/
 *.RDataTmp*
 *.chk
 *.log
+
+# 文献 PDF 一律不入库（含子目录）
 *.pdf
+**/*.pdf
+HTEBO/02_文献/papers/**/*.pdf
 
 # Office 锁临时文件
 ~$*.xlsx
@@ -32,8 +36,8 @@ __pycache__/
 # 百度网盘同步冲突副本
 *冲突文件*
 
-# TransferBO：默认忽略；仅放行代码、配置与数据文件
-# （不入库：results / exports / docs 图文稿 / third_party 等）
+# TransferBO：默认忽略；放行代码、配置、数据表与文稿（不含 PDF）
+# （不入库：results / exports / third_party / PDF）
 TransferBO/**
 !TransferBO/.gitignore
 !TransferBO/README.md
@@ -48,6 +52,8 @@ TransferBO/**
 !TransferBO/configs/**
 !TransferBO/tests/
 !TransferBO/tests/**
+!TransferBO/docs/
+!TransferBO/docs/**
 !TransferBO/data/
 !TransferBO/data/README.md
 !TransferBO/data/descriptors/
@@ -58,3 +64,5 @@ TransferBO/**
 !TransferBO/data/raw/**
 # 原始超大外部表仍本地保留
 TransferBO/data/raw/external/BH_HTE_Curated_Dataset_v20260219.csv
+# PDF 即使落在放行目录也不入库
+TransferBO/**/*.pdf

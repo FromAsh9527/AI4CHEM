@@ -18,7 +18,16 @@ cd BOUSE
 .\start_descriptors.bat   # 描述符生成
 ```
 
+## TransferBO — 跨反应板迁移贝叶斯优化
+
+- `TransferBO/`：跨反应板 Transfer / Warm-start BO 纯计算回顾性模拟（代码、配置、数据表已入库）
+- 文稿（`docs/` 下的 docx / md / pptx）可入库；运行产物 `results/`、`exports/` 与文献 **PDF** 不进 Git
+
+## HTEBO — 开题与实验方案
+
+- `HTEBO/`：无导向 Pd 烯基化开题报告、投料表、配体清单（docx / md / csv）
+- `HTEBO/02_文献/` 仅占位；**PDF 不上传**
+
 ## 说明
 
-- `TransferBO/`（跨反应板迁移 BO 纯计算模拟）目前仅本地保留，未纳入 Git 跟踪。
-- 大型中间文件（Gaussian 输出、文献 PDF、模型权重等）已被 `.gitignore` 排除，保留在本地/网盘。
+- 文献 PDF、Gaussian 中间文件、模型权重等已被 `.gitignore` 排除，保留在本地/网盘。
