@@ -1,0 +1,42 @@
+超算：两库「底物+条件」均为 Morgan（TransferBO2.0 Phase B）
+
+规模：胺化 450；Suzuki 360。表示：condition=morgan_r2 + substrate=morgan_r2 + Tanimoto。
+条件指纹已写入 DB；超算运行不需要 RDKit。
+
+本机：
+  python scripts/build_condition_morgan_descriptors.py   # 若尚未入库
+  python scripts/hpc/pack_rep_B_morgan_both_hpc.py
+上传：
+  transferbo2_rep_B_morgan_both_hpc.tgz
+
+远程：
+
+  mkdir -p ~/TransferBO2.0
+  cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_rep_B_morgan_both_hpc.tgz
+  sed -i 's/\r$//' scripts/hpc/*.sh
+  source $HOME/miniconda3/etc/profile.d/conda.sh
+  conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+
+  python scripts/run_loso.py --config configs/amination_rep_B_morgan_both_hpc.yaml --dry-run
+  # Total jobs: 450
+  python scripts/run_loso.py --config configs/suzuki_rep_B_morgan_both_hpc.yaml --dry-run
+  # Total jobs: 360
+
+  DRY_RUN=1 bash scripts/hpc/submit_amination_rep_B_morgan_both_dsub.sh
+  DRY_RUN=1 bash scripts/hpc/submit_suzuki_rep_B_morgan_both_dsub.sh
+
+  bash scripts/hpc/submit_amination_rep_B_morgan_both_dsub.sh
+  bash scripts/hpc/submit_suzuki_rep_B_morgan_both_dsub.sh
+
+进度：
+  find results/amination_rep_B_morgan_both_full -name '*.json' ! -name 'loso_records.json' | wc -l   # 450
+  find results/suzuki_rep_B_morgan_both_full -name '*.json' ! -name 'loso_records.json' | wc -l      # 360
+
+收工：
+  python scripts/run_loso.py --config configs/amination_rep_B_morgan_both_hpc.yaml --rebuild-only
+  python scripts/run_loso.py --config configs/suzuki_rep_B_morgan_both_hpc.yaml --rebuild-only
+  tar -czf ~/rep_B_morgan_both_results.tgz \
+    results/amination_rep_B_morgan_both_full \
+    results/suzuki_rep_B_morgan_both_full

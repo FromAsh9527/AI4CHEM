@@ -1,0 +1,19 @@
+一对一源→靶轨（已配置，默认不跑）
+
+协议：docs/08_experiment_pair_v1.md
+跑数：scripts/run_pair.py
+
+本机核对 job 数：
+
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+  python scripts/run_pair.py --config configs/amination_pair_v1_full.yaml --dry-run
+  # Total jobs: 4350
+
+  python scripts/run_pair.py --config configs/suzuki_pair_v1_full.yaml --dry-run
+  # Total jobs: 2760
+
+  python scripts/run_pair.py --config configs/amination_pair_v1_pilot.yaml --dry-run
+  python scripts/run_pair.py --config configs/suzuki_pair_v1_pilot.yaml --dry-run
+
+决定开跑时：先各自 pilot，再 full（超算可仿 LOSO：按 seed 分片 + --skip-existing）。
+暂不自动提交。

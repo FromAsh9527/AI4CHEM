@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg
+
+# Env / IDE
+.env
+.venv/
+venv/
+.idea/
+.vscode/
+*.swp
+
+# Local runtime artifacts (keep schema & seeds in repo)
+results/
+exports/
+archive/
+_npm_cache/
+node_modules/
+.pytest_cache/
+_tmp_*
+*.db-journal
+data/db/*.db
+!data/db/.gitkeep
+
+# Large raw dumps / HPC packs (optional local only)
+data/raw/external/
+*.tgz
+*.tar.gz
+*.tar
+*.zip
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

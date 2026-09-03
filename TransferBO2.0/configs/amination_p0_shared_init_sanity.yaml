@@ -1,0 +1,39 @@
+# P0 sanity — amination 2 targets × 6 strategies × 5 seeds = 60 jobs
+# Expect: R1/R2 match Step1; C2 (cold-EI - cold-random) > 0 on amination
+# Protocol: docs/17_step3_experiment_plan.md §3.4
+
+db: data/db/transferbo2.db
+
+experiment_id: amination_p0_shared_init_sanity
+
+n_init: 5
+budget: 20
+
+seeds: [0, 1, 2, 3, 4]
+
+acquisition: ei
+topk: 5
+
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+
+use_plate_correction: false
+substrate_descriptor: hashed_smiles_v1
+condition_features: ohe
+
+# Pick 2 substrates with strong Step1 topk signal (adjust if IDs differ in your DB)
+target_substrates:
+  - sub_s4
+  - sub_s7
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - cold_random_post
+  - topk_random_post
+  - topk_only
+
+out_dir: results/amination_p0_shared_init_sanity

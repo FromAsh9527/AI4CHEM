@@ -1,0 +1,21 @@
+# Amination matched-init audit (audit recommendation, 2026-08-22)
+# Goal: decompose "topk vs cold" on the MAIN library into
+#   C1: topk+EI vs topk+random (given the historical start, does EI still add value?)
+#   C2: cold+EI vs cold+random (same random init; is EI itself effective on amination?)
+# Mirrors P0 (suzuki_p0_shared_init) but for amination, all 15 targets.
+# 150 jobs = 15 targets x 2 strategies x 5 seeds.
+# NOTE: cold_random_post / topk_random_post share init with cold_start / topk_warm
+#       (verified by tests/test_p0_shared_init.py).
+db: data/db/transferbo2.db
+experiment_id: amination_matched_init_audit
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+use_plate_correction: false
+target_substrates: null   # all 15
+strategies:
+  - cold_random_post
+  - topk_random_post
+out_dir: results/amination_matched_init_audit

@@ -1,0 +1,15 @@
+# Leave-one-substrate-out on primary amination library
+db: data/db/transferbo2.db
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+# null = all 15 substrates (heavier); start with a subset if needed
+target_substrates: null
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+out_dir: results/amination_loso

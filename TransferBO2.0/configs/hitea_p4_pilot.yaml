@@ -1,0 +1,24 @@
+# HiTEA Suzuki P4 — LOCAL PILOT (wiring check, 2 tasks x 6 strategies x 1 seed = 12 jobs)
+# MUST pass before HPC full run.
+db: data/db/transferbo2_hitea.db
+experiment_id: hitea_p4_pilot
+n_init: 5
+budget: 20
+seeds: [0]
+acquisition: ei
+topk: 5
+max_warm_points: 120
+use_plate_correction: false
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+lengthscale_sub: 1.0
+target_substrates: [hit_01, hit_02]
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - cold_random_post
+  - topk_random_post
+out_dir: results/p4_hitea/pilot

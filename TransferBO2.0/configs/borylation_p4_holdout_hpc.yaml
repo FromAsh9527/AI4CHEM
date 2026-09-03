@@ -1,0 +1,26 @@
+# Ni borylation P4 PRIMARY external holdout — FULL LOSO (docs/18)
+# 990 jobs = 33 tasks x 6 strategies x 5 seeds
+# Full grid: 33 electrophiles x 23 ligands x 2 solvents = 1518 (single measurement)
+# HPC: scripts/hpc/README_BORYLATION_P4_HPC.md
+db: data/db/transferbo2_borylation.db
+experiment_id: borylation_p4_holdout
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 120
+use_plate_correction: false
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+lengthscale_sub: 1.0
+target_substrates: null   # all 33 electrophiles
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - cold_random_post
+  - topk_random_post
+out_dir: results/p4_borylation/loso

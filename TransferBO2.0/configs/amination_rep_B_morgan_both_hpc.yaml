@@ -1,0 +1,32 @@
+# Step1b Phase B — BOTH condition + substrate Morgan (amination HPC full)
+# condition_features=morgan_r2 (precomputed in DB) · substrate=morgan_r2 · Tanimoto
+# 450 jobs = 15×6×5. Runtime does NOT need RDKit if condition morgan is in DB.
+
+db: data/db/transferbo2.db
+experiment_id: amination_rep_B_morgan_both_hpc
+
+substrate_descriptor: morgan_r2
+condition_features: morgan_r2
+similarity_metric: tanimoto
+
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/amination_rep_B_morgan_both_full

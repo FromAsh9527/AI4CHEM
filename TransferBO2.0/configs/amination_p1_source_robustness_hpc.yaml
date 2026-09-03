@@ -1,0 +1,42 @@
+# P1+P2 — source subset robustness (amination primary)
+# Protocol: docs/17_step3_experiment_plan.md §4
+# Offline Jaccard/init_best first; BO runs are optional subset (see plan §4.3)
+
+db: data/db/transferbo2.db
+
+experiment_id: amination_p1_source_robustness
+
+n_init: 5
+budget: 20
+
+seeds: [0, 1, 2, 3, 4]
+
+acquisition: ei
+topk: 5
+
+substrate_descriptor: hashed_smiles_v1
+condition_features: ohe
+
+use_plate_correction: false
+
+# Subset grid (implemented by scripts/run_source_subset_loso.py)
+source_counts: [1, 2, 3, 5, all]
+subset_replicates: 20
+subset_seed_base: 0
+
+target_substrates: null   # all 15
+
+# BO arms (when not offline-only)
+strategies:
+  - topk_warm
+  - cold_start
+  - random
+
+# Optional: only run full BO for these source_counts (saves compute)
+bo_source_counts: [1, 3, all]
+
+# Morgan nearest arm uses this descriptor when enabled
+nearest_descriptor: morgan_r2
+nearest_similarity: tanimoto
+
+out_dir: results/p1p2_source_robustness/amination

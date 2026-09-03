@@ -1,0 +1,19 @@
+# Amination topk ablation (post-FROZEN): vary k for topk_warm + baselines + topk_safe_gate
+# k grid run by scripts/run_amination_topk_ablation.py
+db: data/db/transferbo2.db
+experiment_id: amination_topk_ablation
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+target_substrates: null
+topk_grid: [1, 3, 5, 10]
+baseline_strategies: [random, cold_start]
+gate_strategy: topk_safe_gate
+out_dir: results/amination_topk_ablation

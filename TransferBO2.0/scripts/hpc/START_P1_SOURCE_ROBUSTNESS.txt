@@ -1,0 +1,40 @@
+超算：P1 source-subset BO LOSO（TransferBO2.0 Step3）
+
+规模：
+  胺化  675 jobs  (15×3 n_s×3策略×5 seed)  → results/p1p2_source_robustness/amination/
+  Suzuki 360 jobs (12×2 n_s×3策略×5 seed)  → results/p1p2_source_robustness/suzuki/
+  合计 1035 JSON
+
+本机：
+  python scripts/hpc/pack_p1_source_robustness_hpc.py
+上传到家目录：
+  transferbo2_p1_source_robustness_hpc.tgz
+
+远程（登录超算后）：
+
+  mkdir -p ~/TransferBO2.0 && cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_p1_source_robustness_hpc.tgz
+  sed -i 's/\r$//' scripts/hpc/*.sh
+  source $HOME/miniconda3/etc/profile.d/conda.sh && conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+
+  # 可选：只检查 job 数
+  python scripts/run_source_subset_loso.py --config configs/amination_p1_source_robustness_hpc.yaml --dry-run
+  python scripts/run_source_subset_loso.py --config configs/suzuki_p1_source_robustness_hpc.yaml --dry-run
+
+  # 一次提交两轨（10 个 dsub shard，各 5×2）
+  DRY_RUN=1 bash scripts/hpc/submit_p1_all_dsub.sh
+  bash scripts/hpc/submit_p1_all_dsub.sh
+
+  # 或分开提交：
+  # bash scripts/hpc/submit_p1_amination_dsub.sh
+  # bash scripts/hpc/submit_p1_suzuki_dsub.sh
+
+进度：
+  find results/p1p2_source_robustness/amination -name '*__seed*.json' | wc -l   # 675
+  find results/p1p2_source_robustness/suzuki -name '*__seed*.json' | wc -l     # 360
+
+回传：
+  tar -czf ~/p1_source_robustness_bo_results.tgz \
+    results/p1p2_source_robustness/amination \
+    results/p1p2_source_robustness/suzuki

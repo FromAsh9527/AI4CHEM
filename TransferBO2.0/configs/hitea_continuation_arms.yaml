@@ -1,0 +1,17 @@
+# HiTEA continuation-arm experiment: topk init + warm continuation options
+# 110 jobs = 11 targets x 2 new arms (warmtop5, warmall) x 5 seeds
+db: data/db/transferbo2_hitea.db
+experiment_id: hitea_continuation_arms
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 120
+use_plate_correction: false
+rule: mean
+target_substrates: null
+strategies:
+  - topk_warm_warmtop5
+  - topk_warm_warmall
+out_dir: results/hitea_continuation_arms

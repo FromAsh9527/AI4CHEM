@@ -1,0 +1,37 @@
+# P1+P2 — source subset robustness (Suzuki auxiliary)
+# Protocol: docs/17_step3_experiment_plan.md §4
+
+db: data/db/transferbo2_suzuki.db
+
+experiment_id: suzuki_p1_source_robustness
+
+n_init: 5
+budget: 20
+
+seeds: [0, 1, 2, 3, 4]
+
+acquisition: ei
+topk: 5
+
+substrate_descriptor: hashed_smiles_v1
+condition_features: ohe
+
+use_plate_correction: false
+
+source_counts: [1, 2, 3, 5, all]
+subset_replicates: 10
+subset_seed_base: 0
+
+target_substrates: null
+
+strategies:
+  - topk_warm
+  - cold_start
+  - random
+
+bo_source_counts: [3, all]
+
+nearest_descriptor: morgan_r2
+nearest_similarity: tanimoto
+
+out_dir: results/p1p2_source_robustness/suzuki

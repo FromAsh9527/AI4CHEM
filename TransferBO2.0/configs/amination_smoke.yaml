@@ -1,0 +1,20 @@
+# Amination primary library — smoke LOSO
+db: data/db/transferbo2.db
+target_substrate: sub_s4
+n_init: 5
+budget: 15
+seeds: [0]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+use_plate_correction: false
+gate_spearman_min: 0.1
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - plate_aware
+  - safe_gate
+out_dir: results/amination_smoke

@@ -1,0 +1,33 @@
+# Step1b Phase A — amination full LOSO
+# Condition: OHE. Substrate: Morgan r2 + Tanimoto.
+
+db: data/db/transferbo2.db
+experiment_id: amination_rep_A_morgan_sub_full
+
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+
+n_init: 5
+budget: 20
+seeds: [0, 1, 2]
+acquisition: ei
+topk: 5
+max_warm_points: 100
+warm_strength: 0.5
+lengthscale_sub: 1.0
+gate_spearman_min: 0.15
+gate_sim_min: 0.15
+use_plate_correction: false
+
+# all 15 substrates (omit target_substrates → all)
+
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - sim_weighted
+  - safe_gate
+
+out_dir: results/amination_rep_A_morgan_sub_full

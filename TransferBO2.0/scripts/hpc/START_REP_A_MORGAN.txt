@@ -1,0 +1,42 @@
+超算：两个库 Phase A Morgan 全量 LOSO（TransferBO2.0）
+
+说明：morgan_r2 已写入两个 DB；超算只跑 BO 网格（不需要 RDKit）。
+规模：胺化 450 = 15×6×5；Suzuki 360 = 12×6×5。DFT 不做。
+
+本机：
+  python scripts/hpc/pack_rep_A_morgan_hpc.py
+用蓝图心算【文件管理】传到远程家目录：
+  transferbo2_rep_A_morgan_hpc.tgz
+
+远程：
+
+  mkdir -p ~/TransferBO2.0
+  cd ~/TransferBO2.0
+  tar -xzf ~/transferbo2_rep_A_morgan_hpc.tgz
+  sed -i 's/\r$//' scripts/hpc/*.sh
+  source $HOME/miniconda3/etc/profile.d/conda.sh
+  conda activate base
+  export PYTHONPATH=$PWD/src${PYTHONPATH:+:$PYTHONPATH}
+
+  # dry-run
+  python scripts/run_loso.py --config configs/amination_rep_A_morgan_sub_hpc.yaml --dry-run
+  # Total jobs: 450
+  python scripts/run_loso.py --config configs/suzuki_rep_A_morgan_sub_hpc.yaml --dry-run
+  # Total jobs: 360
+
+  # 提交（可先 DRY_RUN=1）
+  bash scripts/hpc/submit_amination_rep_A_dsub.sh
+  bash scripts/hpc/submit_suzuki_rep_A_dsub.sh
+
+进度：
+  find results/amination_rep_A_morgan_sub_full -name '*.json' ! -name 'loso_records.json' | wc -l
+  # 450
+  find results/suzuki_rep_A_morgan_sub_full -name '*.json' ! -name 'loso_records.json' | wc -l
+  # 360
+
+收工：
+  python scripts/run_loso.py --config configs/amination_rep_A_morgan_sub_hpc.yaml --rebuild-only
+  python scripts/run_loso.py --config configs/suzuki_rep_A_morgan_sub_hpc.yaml --rebuild-only
+  tar -czf ~/rep_A_morgan_results.tgz results/amination_rep_A_morgan_sub_full results/suzuki_rep_A_morgan_sub_full
+
+可选：本机已跑 seed 0–2 时可把 JSON 一并上传，配合 --skip-existing 只补 3–4。

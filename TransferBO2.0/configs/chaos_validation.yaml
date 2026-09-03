@@ -1,0 +1,26 @@
+# CHAOS 1-D independent validation (docs/25)
+# 100 jobs = 4 plates x 5 strategies x 5 seeds
+# Note: task = reaction (plate); condition space is 1-D (720 additives).
+db: data/db/transferbo2_chaos.db
+experiment_id: chaos_validation
+n_init: 5
+budget: 20
+seeds: [0, 1, 2, 3, 4]
+acquisition: ei
+topk: 5
+max_warm_points: 120
+use_plate_correction: false
+rule: mean
+substrate_descriptor: morgan_r2
+condition_features: ohe
+similarity_metric: tanimoto
+lengthscale_sub: 1.0
+target_substrates: [plate_1, plate_2, plate_3, plate_4]
+strategies:
+  - random
+  - cold_start
+  - topk_warm
+  - nearest_topk_warm
+  - topk_random_post
+  - cold_random_post
+out_dir: results/chaos_validation
