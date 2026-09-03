@@ -9,7 +9,7 @@ reaction,reagent,MW,role,n_mmol,mass_mg,vol_uL,notes
 2024_meta,ethyl acrylate,100.12,limiting olefin,0.1,10.0,10.9,
 2024_meta,Pd(OAc)2,224.50,10 mol% vs olefin,0.01,2.24,,
 2024_meta,L2 L11 pyridine-pyridone CMe2,214.26,10 mol%,0.01,2.14,,"see 20260903 ligand synthesis"
-2024_meta,L3 2,6-lutidine,107.15,1 equiv,0.1,10.7,11.6,confirm from SI
+2024_meta,L3 2,6-lutidine,107.15,1 equiv,0.1,10.7,11.6,"placeholder; also buy pyridine and 3,5-lutidine; lock vs SI figure"
 2024_meta,Cu(OPiv)2,265.78,1 equiv,0.1,26.6,,backup Cu(OAc)2
 2024_meta,AgOAc,166.91,15 mol%,0.015,2.50,,
 2024_meta,AcOH,60.05,15 mol%,0.015,0.90,0.86,
@@ -17,9 +17,9 @@ reaction,reagent,MW,role,n_mmol,mass_mg,vol_uL,notes
 2017_0.1mmol,anisole,108.14,limiting arene,0.1,10.8,10.9,
 2017_0.1mmol,ethyl acrylate,100.12,2 equiv,0.2,20.0,21.7,
 2017_0.1mmol,Pd(OAc)2,224.50,10 mol%,0.01,2.24,,
-2017_0.1mmol,2-pyridone from SI,163.10,20 mol% placeholder,0.02,3.26,,"REPLACE after SI"
+2017_0.1mmol,L69 3,5-bis-CF3-2-pyridone,231.09,30 mol%,0.03,6.93,,"Nature 2017 SI; CAS 38609-76-6"
 2017_0.1mmol,AgOAc,166.91,3 equiv,0.3,50.1,,HAND WEIGH
-2017_0.1mmol,HFIP,,,,,1000,~90 C 24 h
+2017_0.1mmol,HFIP,,,,,500,"SI 0.50 mL 100 C 24 h; 1.00 mL OK if matching para vials"
 TIPS_synth_2mmol,phenol,94.11,1 equiv,2.0,188,,
 TIPS_synth_2mmol,imidazole,68.08,2 equiv,4.0,272,,
 TIPS_synth_2mmol,TIPSCl,192.80,1.1 equiv,2.2,424,471,d=0.901
