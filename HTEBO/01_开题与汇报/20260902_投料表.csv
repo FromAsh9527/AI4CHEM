@@ -8,7 +8,7 @@ reaction,reagent,MW,role,n_mmol,mass_mg,vol_uL,notes
 2024_meta,TIPS-PhOH 1a,250.45,3 equiv,0.3,75.1,,
 2024_meta,ethyl acrylate,100.12,limiting olefin,0.1,10.0,10.9,
 2024_meta,Pd(OAc)2,224.50,10 mol% vs olefin,0.01,2.24,,
-2024_meta,L2 pyridine-pyridone,172.18,10 mol%,0.01,1.72,,"confirm MW/CAS from SI"
+2024_meta,L2 L11 pyridine-pyridone CMe2,214.26,10 mol%,0.01,2.14,,"see 20260903 ligand synthesis"
 2024_meta,L3 2,6-lutidine,107.15,1 equiv,0.1,10.7,11.6,confirm from SI
 2024_meta,Cu(OPiv)2,265.78,1 equiv,0.1,26.6,,backup Cu(OAc)2
 2024_meta,AgOAc,166.91,15 mol%,0.015,2.50,,
