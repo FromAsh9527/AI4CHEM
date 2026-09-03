@@ -1,11 +1,11 @@
-"""A2 rank pooling smoke + matched init with cold."""
+"""A2 rank pooling smoke + matched init with cold + leakage audit."""
 
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-
-from transferbo.bo.loop import percentile_ranks
+import transferbo.bo.loop as loop_mod
+from transferbo.bo.loop import percentile_ranks, run_bo_loop
 from transferbo.data.oracle import PlateOracle
 from transferbo.strategies.base import StrategyConfig
 from transferbo.strategies.cold_start import ColdStartStrategy
@@ -55,3 +55,41 @@ def test_label_rank_warm_matches_cold_init_and_runs():
     assert len(lab.bo.best_so_far) == 14
     # evaluation curve is raw yield, not ranks in [0,1] only
     assert lab.bo.best_so_far[-1] >= lab.bo.best_so_far[0]
+
+
+def test_rank_mode_never_ranks_full_unobserved_board(monkeypatch):
+    """Target percentile_ranks must see only currently observed target yields."""
+    rng = np.random.default_rng(1)
+    n = 30
+    X = rng.normal(size=(n, 4))
+    y = rng.uniform(0, 10, size=n)
+    y[-1] = 1e6  # extreme unobserved point — must not enter rank sets early
+    oracle = PlateOracle(
+        pd.DataFrame({"response": y, "smiles": [f"c{i}" for i in range(n)]})
+    )
+    warm_X = rng.normal(size=(8, 4))
+    warm_y = percentile_ranks(rng.uniform(0, 10, size=8))
+    init = np.arange(5)
+    seen_lengths: list[int] = []
+    real = loop_mod.percentile_ranks
+
+    def spy(arr):
+        seen_lengths.append(len(np.asarray(arr)))
+        return real(arr)
+
+    monkeypatch.setattr(loop_mod, "percentile_ranks", spy)
+    run_bo_loop(
+        oracle,
+        X,
+        init_indices=init,
+        budget=10,
+        target_pool_mode="rank",
+        warm_X=warm_X,
+        warm_y=warm_y,
+        seed=0,
+    )
+    # one call per acquisition after init (budget-init = 5); lengths 5..9
+    assert seen_lengths
+    assert max(seen_lengths) < n
+    assert seen_lengths[0] == 5
+    assert seen_lengths[-1] == 9

@@ -1,0 +1,51 @@
+# W10 — light task-ID feature arm (binary indicator on pooled GP)
+# Compare: cold_start vs label_warm vs label_taskid_warm
+
+experiment:
+  name: edbo_suzuki_taskid
+  output_dir: results/external_edbo_suzuki_taskid
+
+data:
+  processed_path: data/processed/edbo_suzuki_plates.csv
+  response_col: response
+  smiles_col: smiles
+  plate_col: plate_id
+  id_col: additive_id
+
+grid:
+  strategies: [cold_start, label_warm, label_taskid_warm]
+  representations: [morgan, dft]
+  plates: [suz_t1, suz_t9]
+  include_same_plate: false
+
+representation:
+  name: morgan
+  morgan:
+    radius: 2
+    n_bits: 2048
+  dft:
+    table_path: data/descriptors/edbo_suzuki_condition_dft.csv
+    smiles_col: smiles
+    standardize: true
+
+strategy:
+  name: label_taskid_warm
+  n_init: 20
+  batch_size: 1
+  init_mode: random
+
+bo:
+  budget: 100
+  acquisition: ei
+  normalize_y: true
+  backend: sklearn
+
+transfer:
+  source_fraction: 1.0
+  max_warm_points: 150
+
+seeds: [0]
+
+metrics:
+  top_fracs: [0.01, 0.05]
+  save_curves: true

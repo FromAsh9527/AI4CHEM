@@ -3,7 +3,9 @@
 from .base import StrategyConfig, StrategyResult, run_strategy
 from .cold_start import ColdDiversityStrategy, ColdStartStrategy
 from .diversity_warm import DiversityWarmStartStrategy
+from .init_only_warm import InitOnlyWarmStartStrategy
 from .label_rank_warm import LabelRankWarmStartStrategy
+from .label_taskid_warm import LabelTaskIdWarmStartStrategy
 from .label_warm import LabelWarmStartStrategy
 from .label_weight_warm import LabelWeightWarmStartStrategy
 from .multitask import SimpleMultiTaskStrategy
@@ -16,6 +18,8 @@ STRATEGY_REGISTRY = {
     "diversity_warm": DiversityWarmStartStrategy,
     "label_warm": LabelWarmStartStrategy,
     "label_rank_warm": LabelRankWarmStartStrategy,
+    "label_taskid_warm": LabelTaskIdWarmStartStrategy,
+    "init_only_warm": InitOnlyWarmStartStrategy,
     "multitask": SimpleMultiTaskStrategy,
     "random": RandomStrategy,
     "transfer_gate": TransferGateStrategy,
@@ -47,6 +51,8 @@ __all__ = [
     "LabelWarmStartStrategy",
     "LabelRankWarmStartStrategy",
     "LabelWeightWarmStartStrategy",
+    "LabelTaskIdWarmStartStrategy",
+    "InitOnlyWarmStartStrategy",
     "SimpleMultiTaskStrategy",
     "RandomStrategy",
     "TransferGateStrategy",

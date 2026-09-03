@@ -195,8 +195,157 @@ def posterior_probe(
     return out
 
 
+def effective_weight_table(
+    *,
+    source: str = "suz_t1",
+    target: str = "suz_t9",
+    seed: int = 0,
+    n_init: int = 20,
+    max_warm: int = 150,
+) -> pd.DataFrame:
+    """Quantify nominal vs effective source downweighting (W3).
+
+    Reports WhiteKernel noise, alpha vs pooled y variance, and total precision
+    mass of source vs target at fixed init.
+    """
+    from transferbo.bo.gp_model import SurrogateGP
+    from transferbo.data.load import get_plate, load_plates
+    from transferbo.representations import build_representation
+    from transferbo.strategies.base import sample_init_indices, select_source_indices
+
+    df = load_plates(ROOT / "data/processed/edbo_suzuki_plates.csv")
+    src_df = get_plate(df, source)
+    tgt_df = get_plate(df, target)
+    smiles_s = src_df["smiles"].astype(str).tolist()
+    smiles_t = tgt_df["smiles"].astype(str).tolist()
+    rep = build_representation("morgan", radius=2, n_bits=2048)
+    rep.fit(smiles_s + smiles_t)
+    X_s = np.asarray(rep.transform(smiles_s), dtype=np.float64)
+    X_t = np.asarray(rep.transform(smiles_t), dtype=np.float64)
+    rng = np.random.default_rng(seed)
+    init_idx = sample_init_indices(len(tgt_df), n_init, rng)
+    src_rng = np.random.default_rng(seed + 1_000_003)
+    keep = select_source_indices(
+        len(src_df), source_fraction=1.0, max_warm_points=max_warm, rng=src_rng
+    )
+    warm_X, train_Xt = X_s[keep], X_t[init_idx]
+    warm_y = src_df["response"].to_numpy(dtype=float)[keep]
+    y_init = tgt_df["response"].to_numpy(dtype=float)[init_idx]
+
+    rows = []
+    for w in [1.0, 0.5, 0.25, 0.1, 1e-2, 1e-3, 1e-4]:
+        train_X = np.vstack([warm_X, train_Xt])
+        train_y = np.concatenate([warm_y, y_init])
+        y_std = float(np.std(train_y)) or 1.0
+        alpha_src = BASE_NOISE / w
+        alpha_tgt = BASE_NOISE
+        alpha = np.concatenate(
+            [
+                np.full(len(warm_y), alpha_src),
+                np.full(len(y_init), alpha_tgt),
+            ]
+        )
+        gp = SurrogateGP(backend="sklearn", normalize_y=True, random_state=seed)
+        gp.fit(train_X, train_y, alpha=alpha)
+        # WhiteKernel noise is on *normalized* y scale
+        kernel = gp._model.kernel_
+        white = float(kernel.k2.noise_level)
+        # precision ~ 1/(alpha + white) on normalized scale; alpha also on raw? 
+        # sklearn: alpha is variance of Gaussian noise on the *training targets as passed*
+        # we pass normalized y, so alpha is in normalized units if we don't scale alpha —
+        # IMPORTANT: current code passes alpha in raw units while y is normalized inside fit.
+        # Document both raw alpha and alpha relative to y_std^2.
+        alpha_src_over_var = alpha_src / (y_std**2)
+        # Effective weight vs target point: (alpha_tgt+white)/(alpha_src+white) on norm scale
+        # Using white on norm scale; map alpha roughly by /y_std^2
+        a_s = alpha_src / (y_std**2)
+        a_t = alpha_tgt / (y_std**2)
+        prec_s = 1.0 / (a_s + white)
+        prec_t = 1.0 / (a_t + white)
+        rows.append(
+            {
+                "warm_weight": w,
+                "alpha_src_raw": alpha_src,
+                "alpha_tgt_raw": alpha_tgt,
+                "pooled_y_std": y_std,
+                "alpha_src_over_yvar": alpha_src_over_var,
+                "whitekernel_noise_norm": white,
+                "n_warm": len(warm_y),
+                "n_tgt": len(y_init),
+                "prec_per_src_point": prec_s,
+                "prec_per_tgt_point": prec_t,
+                "total_prec_src": prec_s * len(warm_y),
+                "total_prec_tgt": prec_t * len(y_init),
+                "src_to_tgt_total_prec_ratio": (prec_s * len(warm_y))
+                / max(prec_t * len(y_init), 1e-12),
+                "rel_point_weight_src_vs_tgt": prec_s / max(prec_t, 1e-12),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def main() -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument(
+        "--effective-only",
+        action="store_true",
+        help="Only write effective-weight report (skip full trajectory audit)",
+    )
+    args = ap.parse_args()
     STATS.mkdir(parents=True, exist_ok=True)
+
+    print("== effective weight table ==")
+    eff = effective_weight_table()
+    eff_path = STATS / "edbo_suzuki_a3_effective_weight.csv"
+    eff.to_csv(eff_path, index=False)
+    print(eff.to_string(index=False))
+    # prose
+    e_lines = [
+        "# A3 effective source downweighting (W3)",
+        "",
+        "Script: `scripts/sanity_check_a3_weights.py --effective-only`",
+        "",
+        f"Probe: Morgan, suz_t1→suz_t9, seed=0, n_init=20, max_warm=150.",
+        f"Table: `{eff_path.name}`",
+        "",
+        "## Interpretation",
+        "",
+        "- Diagonal `alpha_src = 1e-4 / w` is **additional** to a learned `WhiteKernel`.",
+        "- Targets are jointly z-scored (`normalize_y=True`); WhiteKernel lives on that scale.",
+        "- For grid `w∈{0.1,0.25,0.5}`, `alpha_src` is still ≪ typical response variance,",
+        "  so each source point remains nearly as precise as a target point;",
+        "  with `n_warm≈150` vs `n_tgt=20`, **total source precision mass dominates**.",
+        "- Therefore A3 tested **nominal** moderate weights, not strong reliability shrinkage.",
+        "- Prefer wording: *tested weight band did not repair negative transfer*;",
+        "  not *moderate downweighting cannot work*.",
+        "",
+        "## Key rows (src/tgt total precision ratio)",
+        "",
+        "| w | alpha_src | white (norm) | src/tgt total prec |",
+        "|---:|---:|---:|---:|",
+    ]
+    for w in (1.0, 0.5, 0.25, 0.1, 0.01, 1e-4):
+        r = eff.loc[eff.warm_weight == w].iloc[0]
+        e_lines.append(
+            f"| {w:g} | {r.alpha_src_raw:.3g} | {r.whitekernel_noise_norm:.3g} | "
+            f"{r.src_to_tgt_total_prec_ratio:.2f} |"
+        )
+    e_lines += [
+        "",
+        "## Claiming",
+        "",
+        "OK: nominal w∈{0.1,0.25,0.5} leaves source labels highly trusted; paths often ≈ A1.",
+        "Not OK: “we tested moderate reliability shrinkage sufficient to neutralize sources.”",
+        "",
+    ]
+    eff_note = STATS / "edbo_suzuki_a3_EFFECTIVE_WEIGHT.md"
+    eff_note.write_text("\n".join(e_lines), encoding="utf-8")
+    print("wrote", eff_note)
+    if args.effective_only:
+        return 0
+
     lines = [
         "# A3 source-weight sanity check",
         "",
@@ -209,6 +358,7 @@ def main() -> int:
         "  concatenates per-point `alpha` for `[source…, target…]` into `SurrogateGP.fit`.",
         "- `SurrogateGP._fit_sklearn` forwards `alpha` to `GaussianProcessRegressor(alpha=...)`.",
         "- Note: sklearn kernel also includes a learnable `WhiteKernel`; diagonal `alpha` is *additional* noise.",
+        f"- Effective-weight report: `{eff_note.name}`",
         "",
     ]
 
