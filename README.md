@@ -18,7 +18,11 @@ cd BOUSE
 .\start_descriptors.bat   # 描述符生成
 ```
 
+## TransferBO — 跨反应板迁移贝叶斯优化
+
+- `TransferBO/`：跨反应板 Transfer / Warm-start BO 纯计算回顾性模拟（代码、配置、数据表已入库）
+- 运行产物（`results/`、`exports/`、文稿）与超大外部表仍按 `.gitignore` 本地保留，不进 Git
+
 ## 说明
 
-- `TransferBO/`（跨反应板迁移 BO 纯计算模拟）目前仅本地保留，未纳入 Git 跟踪。
 - 大型中间文件（Gaussian 输出、文献 PDF、模型权重等）已被 `.gitignore` 排除，保留在本地/网盘。
